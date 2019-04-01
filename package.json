@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/xhrbtk/wheel-vue/issues"
   },
-  "homepage": "https://github.com/xhrbtk/wheel-vue#readme"
+  "homepage": "https://github.com/xhrbtk/wheel-vue#readme",
+  "dependencies": {
+    "vue": "^2.6.10"
+  }
 }
