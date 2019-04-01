@@ -1,0 +1,23 @@
+{
+  "name": "wheel-vue",
+  "version": "0.0.1",
+  "description": "这是一个UI框架",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xhrbtk/wheel-vue.git"
+  },
+  "keywords": [
+    "vue",
+    "ui"
+  ],
+  "author": "xhrbtk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xhrbtk/wheel-vue/issues"
+  },
+  "homepage": "https://github.com/xhrbtk/wheel-vue#readme"
+}
