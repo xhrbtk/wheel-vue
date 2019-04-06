@@ -8,3 +8,10 @@
   box-sizing: border-box;
 }
 ```
+
+## 安装parcel
+```
+  npm install -D parcel-bundler -v1.9.2
+  //在运行的时候
+  ./node_modules/.bin/parcel index.html
+```
