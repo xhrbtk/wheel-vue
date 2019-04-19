@@ -12405,17 +12405,9 @@ function patchScopedSlots (instance) {
 }
 
 },{}],"src/button.vue":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
 //
 //
 //
-var _default = {};
-exports.default = _default;
         var $18d890 = exports.default || module.exports;
       
       if (typeof $18d890 === 'function') {
@@ -12505,7 +12497,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54595" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49399" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
