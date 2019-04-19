@@ -1,5 +1,7 @@
 <template>
-  <button class="g-button">按钮啊</button>
+  <button class="g-button">
+    <slot></slot>
+  </button>
 </template>
 <script>
 </script>

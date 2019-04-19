@@ -14,4 +14,12 @@
   npm install -D parcel-bundler -v1.9.2
   //在运行的时候
   ./node_modules/.bin/parcel index.html
+  npx parcel index.html 上面书写形式的简略版
+  npx parcel index.html --no-cache 运行的时候不会再有缓存
 ```
+
+## 工具知识 webpack parcel scss less babel
+## 语言特性 promise async 深入
+## 抽象 代码组织 流程 设计模式 迭代
+
+## slot 插槽工具
