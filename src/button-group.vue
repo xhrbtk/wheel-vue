@@ -5,7 +5,15 @@
 </template>
 <script>
 export default {
-
+  mounted(){
+    // 检测子元素是不是button 如果用户在button外面包裹了div 需要提醒
+    for(let node of this.$el.children){
+      let name = node.nodeName.toLowerCase()
+      if(name!== 'button'){
+        console.log(`g-button 的子元素应该全是g-button, 但是你写的是 ${name}`)
+      }
+    }
+  }
 }
 </script>
 <style lang="scss">

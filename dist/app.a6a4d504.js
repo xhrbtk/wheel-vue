@@ -12593,7 +12593,38 @@ exports.default = void 0;
 //
 //
 //
-var _default = {};
+var _default = {
+  mounted: function mounted() {
+    // 检测子元素是不是button 如果用户在button外面包裹了div 需要提醒
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = this.$el.children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var node = _step.value;
+        var name = node.nodeName.toLowerCase();
+
+        if (name !== 'button') {
+          console.log("g-button \u7684\u5B50\u5143\u7D20\u5E94\u8BE5\u5168\u662Fg-button, \u4F46\u662F\u4F60\u5199\u7684\u662F ".concat(name));
+        }
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+  }
+};
 exports.default = _default;
         var $6371c5 = exports.default || module.exports;
       
