@@ -23,3 +23,7 @@
 ## 抽象 代码组织 流程 设计模式 迭代
 
 ## slot 插槽工具
+
+## BDD Behavior driven development 行为驱动开发
+## TDD Test driven development  测试驱动开发
+## Assert 断言 （我主观认为）
