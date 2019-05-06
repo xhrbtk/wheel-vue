@@ -27,3 +27,5 @@
 ## BDD Behavior driven development 行为驱动开发
 ## TDD Test driven development  测试驱动开发
 ## Assert 断言 （我主观认为）
+## 安装断言 npm i -D chai
+## vue 单元测试  就是你传一个输入 得到一个输出
