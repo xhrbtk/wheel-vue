@@ -3,6 +3,7 @@
   :class="{[`icon-${iconPosition}`]: true}"
   @click="$emit('click')"
   >
+  <!-- $emit 触发组件的点击事件 -->
     <g-icon :name="icon" v-if="icon && !loading" class="icon"></g-icon>
     <g-icon name="loading" class="loading icon" v-if="loading"></g-icon>
     <div class="content">
@@ -11,8 +12,17 @@
   </button>
 </template>
 <script>
+// 为了测试用例运行成功 --开始
+// import Vue from 'vue'
+import Icon from './icon'
+// Vue.component('g-icon', Icon)
+// 为了测试用例运行成功 --结束
+
 export default{
   // props: ['icon', 'iconPosition']
+  components: {
+    'g-icon': Icon
+  },
   props: {
     icon: {},
     loading: {
