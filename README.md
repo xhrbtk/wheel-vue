@@ -39,3 +39,28 @@
 ## describe it 描述什么东西可以做什么事情
 ## expect(xxx).to.eq(yyy)
 ## npm run test 会自动打包js 打开浏览器 输入网址 运行测试用例 关闭浏览器  将浏览器的结果显示在终端
+
+## 解决问题的关键是加快解决问题的效率
+## 单文件组件--parcel打包--单元测试--自动测试（karma mocha chai）-- 持续集成（Travis ci/circle i）-- package.json(发布)（dist/index.js,dist/index.css）-- yarn link 和 npm link 提高开发速度
+
+
+## 设置淘宝镜像源
+## npm config set registry https://registry.npm.taobao.org --global
+## npm config set disturl https://npm.taobao.org/dist --global
+
+#### 轮子的使用方式
+  ## 安装： npm i wheel-vue
+  ## 引入： import { Button, ButtonGroup, Icon} from 'wheel-vue' 注册
+  ## 如果希望引入的轮子有样式,添加如下代码
+  ```
+  html{
+      --button-height: 32px;
+      --font-size: 14px;
+      --button-bg: white;
+      --button-active-bg: #eee;
+      --border-radius: 4px;
+      --color: #333;
+      --border-color: #999;
+      --border-color-hover: red;
+    }
+  ```
