@@ -10,16 +10,16 @@
 
 使用本框架需要添加border-box
 
-```
-*, *::before, *::after{
-  box-sizing: border-box;
-}
-```
+  ```
+  *, *::before, *::after{
+    box-sizing: border-box;
+  }
+  ```
 IE 8 及以上浏览器都支持此样式
 
 你还需要设置默认颜色等变量（后续会改为 SCSS 变量）
 
-```
+  ```
   html{
       --button-height: 32px;
       --font-size: 14px;
@@ -51,11 +51,7 @@ IE 15 及以上浏览器都支持此样式
     }
   }
 ```
-4. 引入svg symbols
 
-  ```
-  <script src="//at.alicdn.com/t/font_1155046_888pzyyqd9b.js"></script>
-  ```
 
 
 
@@ -84,6 +80,7 @@ IE 15 及以上浏览器都支持此样式
   ./node_modules/.bin/parcel index.html
   npx parcel index.html 上面书写形式的简略版
   npx parcel index.html --no-cache 运行的时候不会再有缓存
+  npm start  -- 已经在package.json里面设置过
 ```
 
 ## 工具知识 webpack parcel scss less babel
@@ -120,3 +117,9 @@ IE 15 及以上浏览器都支持此样式
   ## 安装： npm i wheel-vue
   ## 引入： import { Button, ButtonGroup, Icon} from 'wheel-vue' 注册
   ## 如果希望引入的轮子有样式,添加如下代码
+
+  ##
+  1. c不能运行
+  2. A能运行
+  3. git reset --hard A
+  4. 二分法 (A+C)/2
