@@ -1,6 +1,11 @@
 <template>
   <div class="wrapper" :class="{'error': error}">
-    <input :value="value" type="text" :disabled="disabled" :readonly="readonly">
+    <input :value="value" type="text" :disabled="disabled" :readonly="readonly"
+    @change="$emit('change', $event)"
+    @input="$emit('input', $event)"
+    @focus="$emit('focus', $event)"
+    @blur="$emit('blur', $event)"
+    >
     <template v-if="error">
       <icon name="error" class="icon-error"></icon>
       <span class="error-message">{{error}}</span>
@@ -9,6 +14,7 @@
 </template>
 
 <script>
+// $emit第一个参数是事件名字，第二个参数是传给事件接收者的第一个参数，
 import Icon from './icon'
 export default {
   components: {
