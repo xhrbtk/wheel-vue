@@ -71,3 +71,42 @@
   position: relative;
   z-index: 1;
 }
+.wrapper[data-v-8b01a3] {
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+}
+.wrapper > *[data-v-8b01a3] {
+  margin-right: 0.5em;
+}
+.wrapper > *[data-v-8b01a3]:last-child {
+  margin-right: 0;
+}
+.wrapper.error > input[data-v-8b01a3] {
+  border-color: #f1453D;
+}
+.wrapper > input[data-v-8b01a3] {
+  height: 32px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 0 8px;
+  font-size: inherit;
+}
+.wrapper > input[data-v-8b01a3]:hover {
+  border-color: #666;
+}
+.wrapper > input[data-v-8b01a3]:focus {
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+  outline: none;
+}
+.wrapper > input[disabled][data-v-8b01a3], .wrapper > input[readonly][data-v-8b01a3] {
+  border-color: #ccc;
+  color: #ccc;
+  cursor: not-allowed;
+}
+.wrapper .icon-error[data-v-8b01a3] {
+  fill: #f1453D;
+}
+.wrapper .error-message[data-v-8b01a3] {
+  color: #f1453D;
+}

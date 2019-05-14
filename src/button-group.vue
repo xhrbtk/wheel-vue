@@ -5,6 +5,7 @@
 </template>
 <script>
 export default {
+  name: 'WheelButtonGroup',
   mounted(){
     // 检测子元素是不是button 如果用户在button外面包裹了div 需要提醒
     for(let node of this.$el.children){

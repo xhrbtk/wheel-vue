@@ -19,6 +19,7 @@ import Icon from './icon'
 // 为了测试用例运行成功 --结束
 
 export default{
+  name: 'WheelButton',
   // props: ['icon', 'iconPosition']
   components: {
     'g-icon': Icon
