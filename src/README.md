@@ -123,3 +123,7 @@ IE 15 及以上浏览器都支持此样式
   2. A能运行
   3. git reset --hard A
   4. 二分法 (A+C)/2
+
+## git branch 的用法
+当前所处的那个地方就是Head
+## 使用scss的for循环
