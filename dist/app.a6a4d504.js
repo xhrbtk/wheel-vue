@@ -12473,14 +12473,14 @@ var _default = {
   props: ['name']
 };
 exports.default = _default;
-        var $69ccdc = exports.default || module.exports;
+        var $119433 = exports.default || module.exports;
       
-      if (typeof $69ccdc === 'function') {
-        $69ccdc = $69ccdc.options;
+      if (typeof $119433 === 'function') {
+        $119433 = $119433.options;
       }
     
         /* template */
-        Object.assign($69ccdc, (function () {
+        Object.assign($119433, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -12509,9 +12509,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$69ccdc', $69ccdc);
+            api.createRecord('$119433', $119433);
           } else {
-            api.reload('$69ccdc', $69ccdc);
+            api.reload('$119433', $119433);
           }
         }
 
@@ -12574,14 +12574,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $7c86a8 = exports.default || module.exports;
+        var $18d890 = exports.default || module.exports;
       
-      if (typeof $7c86a8 === 'function') {
-        $7c86a8 = $7c86a8.options;
+      if (typeof $18d890 === 'function') {
+        $18d890 = $18d890.options;
       }
     
         /* template */
-        Object.assign($7c86a8, (function () {
+        Object.assign($18d890, (function () {
           var render = function() {
   var _obj
   var _vm = this
@@ -12635,9 +12635,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$7c86a8', $7c86a8);
+            api.createRecord('$18d890', $18d890);
           } else {
-            api.reload('$7c86a8', $7c86a8);
+            api.reload('$18d890', $18d890);
           }
         }
 
@@ -12694,14 +12694,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $0da36a = exports.default || module.exports;
+        var $6371c5 = exports.default || module.exports;
       
-      if (typeof $0da36a === 'function') {
-        $0da36a = $0da36a.options;
+      if (typeof $6371c5 === 'function') {
+        $6371c5 = $6371c5.options;
       }
     
         /* template */
-        Object.assign($0da36a, (function () {
+        Object.assign($6371c5, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -12728,9 +12728,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$0da36a', $0da36a);
+            api.createRecord('$6371c5', $6371c5);
           } else {
-            api.reload('$0da36a', $0da36a);
+            api.reload('$6371c5', $6371c5);
           }
         }
 
@@ -12793,14 +12793,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $05e493 = exports.default || module.exports;
+        var $8b01a3 = exports.default || module.exports;
       
-      if (typeof $05e493 === 'function') {
-        $05e493 = $05e493.options;
+      if (typeof $8b01a3 === 'function') {
+        $8b01a3 = $8b01a3.options;
       }
     
         /* template */
-        Object.assign($05e493, (function () {
+        Object.assign($8b01a3, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -12848,7 +12848,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-05e493",
+            _scopeId: "data-v-8b01a3",
             functional: undefined
           };
         })());
@@ -12861,9 +12861,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$05e493', $05e493);
+            api.createRecord('$8b01a3', $8b01a3);
           } else {
-            api.reload('$05e493', $05e493);
+            api.reload('$8b01a3', $8b01a3);
           }
         }
 
@@ -12886,11 +12886,22 @@ exports.default = void 0;
 //
 //
 //
+//
 var _default = {
   name: 'WheelRow',
   props: {
     gutter: {
       type: [String, Number]
+    }
+  },
+  computed: {
+    rowStyle: function rowStyle() {
+      // 解构
+      var gutter = this.gutter;
+      return {
+        marginLeft: -gutter / 2 + 'px',
+        marginRight: -gutter / 2 + 'px'
+      };
     }
   },
   mounted: function mounted() {
@@ -12903,27 +12914,21 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $b37762 = exports.default || module.exports;
+        var $4f860c = exports.default || module.exports;
       
-      if (typeof $b37762 === 'function') {
-        $b37762 = $b37762.options;
+      if (typeof $4f860c === 'function') {
+        $4f860c = $4f860c.options;
       }
     
         /* template */
-        Object.assign($b37762, (function () {
+        Object.assign($4f860c, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "row",
-      style: {
-        marginLeft: -_vm.gutter / 2 + "px",
-        marginRight: -_vm.gutter / 2 + "px"
-      }
-    },
+    { staticClass: "row", style: _vm.rowStyle },
     [_vm._t("default")],
     2
   )
@@ -12935,7 +12940,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-b37762",
+            _scopeId: "data-v-4f860c",
             functional: undefined
           };
         })());
@@ -12948,9 +12953,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$b37762', $b37762);
+            api.createRecord('$4f860c', $4f860c);
           } else {
-            api.reload('$b37762', $b37762);
+            api.reload('$4f860c', $4f860c);
           }
         }
 
@@ -12976,8 +12981,6 @@ exports.default = void 0;
 //
 //
 //
-//
-//
 var _default = {
   name: 'WheelCol',
   props: {
@@ -12988,42 +12991,39 @@ var _default = {
     return {
       gutter: 0
     };
+  },
+  computed: {
+    colClass: function colClass() {
+      var span = this.span;
+      var offset = this.os;
+      return [span && "col-".concat(span), offset && "offset-".concat(offset)];
+    },
+    colStyle: function colStyle() {
+      return {
+        paddingLeft: this.gutter / 2 + 'px',
+        paddingRight: this.gutter / 2 + 'px'
+      };
+    }
   }
 };
 exports.default = _default;
-        var $80bc00 = exports.default || module.exports;
+        var $339e0c = exports.default || module.exports;
       
-      if (typeof $80bc00 === 'function') {
-        $80bc00 = $80bc00.options;
+      if (typeof $339e0c === 'function') {
+        $339e0c = $339e0c.options;
       }
     
         /* template */
-        Object.assign($80bc00, (function () {
+        Object.assign($339e0c, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "col",
-      class: [
-        _vm.span && "col-" + _vm.span,
-        _vm.offset && "offset-" + _vm.offset
-      ],
-      style: {
-        paddingLeft: _vm.gutter / 2 + "px",
-        paddingRight: _vm.gutter / 2 + "px"
-      }
-    },
-    [
-      _c(
-        "div",
-        { staticStyle: { border: "1px solid green" } },
-        [_vm._t("default")],
-        2
-      )
-    ]
+    { staticClass: "col", class: _vm.colClass, style: _vm.colStyle },
+    [_vm._t("default")],
+    2
   )
 }
 var staticRenderFns = []
@@ -13033,7 +13033,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-80bc00",
+            _scopeId: "data-v-339e0c",
             functional: undefined
           };
         })());
@@ -13046,9 +13046,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$80bc00', $80bc00);
+            api.createRecord('$339e0c', $339e0c);
           } else {
-            api.reload('$80bc00', $80bc00);
+            api.reload('$339e0c', $339e0c);
           }
         }
 
@@ -13192,11 +13192,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-<<<<<<< HEAD
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56342" + '/');
-=======
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50795" + '/');
->>>>>>> 3d02bc24e07752dfa4875bfd6d1860745f2033e1
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59864" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
