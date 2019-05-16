@@ -12473,14 +12473,14 @@ var _default = {
   props: ['name']
 };
 exports.default = _default;
-        var $119433 = exports.default || module.exports;
+        var $69ccdc = exports.default || module.exports;
       
-      if (typeof $119433 === 'function') {
-        $119433 = $119433.options;
+      if (typeof $69ccdc === 'function') {
+        $69ccdc = $69ccdc.options;
       }
     
         /* template */
-        Object.assign($119433, (function () {
+        Object.assign($69ccdc, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -12509,9 +12509,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$119433', $119433);
+            api.createRecord('$69ccdc', $69ccdc);
           } else {
-            api.reload('$119433', $119433);
+            api.reload('$69ccdc', $69ccdc);
           }
         }
 
@@ -12574,14 +12574,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $18d890 = exports.default || module.exports;
+        var $7c86a8 = exports.default || module.exports;
       
-      if (typeof $18d890 === 'function') {
-        $18d890 = $18d890.options;
+      if (typeof $7c86a8 === 'function') {
+        $7c86a8 = $7c86a8.options;
       }
     
         /* template */
-        Object.assign($18d890, (function () {
+        Object.assign($7c86a8, (function () {
           var render = function() {
   var _obj
   var _vm = this
@@ -12635,9 +12635,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$18d890', $18d890);
+            api.createRecord('$7c86a8', $7c86a8);
           } else {
-            api.reload('$18d890', $18d890);
+            api.reload('$7c86a8', $7c86a8);
           }
         }
 
@@ -12694,14 +12694,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $6371c5 = exports.default || module.exports;
+        var $0da36a = exports.default || module.exports;
       
-      if (typeof $6371c5 === 'function') {
-        $6371c5 = $6371c5.options;
+      if (typeof $0da36a === 'function') {
+        $0da36a = $0da36a.options;
       }
     
         /* template */
-        Object.assign($6371c5, (function () {
+        Object.assign($0da36a, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -12728,9 +12728,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$6371c5', $6371c5);
+            api.createRecord('$0da36a', $0da36a);
           } else {
-            api.reload('$6371c5', $6371c5);
+            api.reload('$0da36a', $0da36a);
           }
         }
 
@@ -12793,14 +12793,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $8b01a3 = exports.default || module.exports;
+        var $05e493 = exports.default || module.exports;
       
-      if (typeof $8b01a3 === 'function') {
-        $8b01a3 = $8b01a3.options;
+      if (typeof $05e493 === 'function') {
+        $05e493 = $05e493.options;
       }
     
         /* template */
-        Object.assign($8b01a3, (function () {
+        Object.assign($05e493, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -12848,7 +12848,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-8b01a3",
+            _scopeId: "data-v-05e493",
             functional: undefined
           };
         })());
@@ -12861,9 +12861,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$8b01a3', $8b01a3);
+            api.createRecord('$05e493', $05e493);
           } else {
-            api.reload('$8b01a3', $8b01a3);
+            api.reload('$05e493', $05e493);
           }
         }
 
@@ -12886,21 +12886,47 @@ exports.default = void 0;
 //
 //
 //
-var _default = {};
+var _default = {
+  name: 'WheelRow',
+  props: {
+    gutter: {
+      type: [String, Number]
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    // 父子传值
+    this.$children.forEach(function (vm) {
+      vm.gutter = _this.gutter;
+    });
+  }
+};
 exports.default = _default;
-        var $4f860c = exports.default || module.exports;
+        var $b37762 = exports.default || module.exports;
       
-      if (typeof $4f860c === 'function') {
-        $4f860c = $4f860c.options;
+      if (typeof $b37762 === 'function') {
+        $b37762 = $b37762.options;
       }
     
         /* template */
-        Object.assign($4f860c, (function () {
+        Object.assign($b37762, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [_vm._t("default")], 2)
+  return _c(
+    "div",
+    {
+      staticClass: "row",
+      style: {
+        marginLeft: -_vm.gutter / 2 + "px",
+        marginRight: -_vm.gutter / 2 + "px"
+      }
+    },
+    [_vm._t("default")],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -12909,7 +12935,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-4f860c",
+            _scopeId: "data-v-b37762",
             functional: undefined
           };
         })());
@@ -12922,9 +12948,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$4f860c', $4f860c);
+            api.createRecord('$b37762', $b37762);
           } else {
-            api.reload('$4f860c', $4f860c);
+            api.reload('$b37762', $b37762);
           }
         }
 
@@ -12947,30 +12973,57 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
 var _default = {
   name: 'WheelCol',
   props: {
-    span: [Number, String]
+    span: [Number, String],
+    offset: [Number, String]
+  },
+  data: function data() {
+    return {
+      gutter: 0
+    };
   }
 };
 exports.default = _default;
-        var $339e0c = exports.default || module.exports;
+        var $80bc00 = exports.default || module.exports;
       
-      if (typeof $339e0c === 'function') {
-        $339e0c = $339e0c.options;
+      if (typeof $80bc00 === 'function') {
+        $80bc00 = $80bc00.options;
       }
     
         /* template */
-        Object.assign($339e0c, (function () {
+        Object.assign($80bc00, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col", class: ["col-" + _vm.span] },
-    [_vm._t("default")],
-    2
+    {
+      staticClass: "col",
+      class: [
+        _vm.span && "col-" + _vm.span,
+        _vm.offset && "offset-" + _vm.offset
+      ],
+      style: {
+        paddingLeft: _vm.gutter / 2 + "px",
+        paddingRight: _vm.gutter / 2 + "px"
+      }
+    },
+    [
+      _c(
+        "div",
+        { staticStyle: { border: "1px solid green" } },
+        [_vm._t("default")],
+        2
+      )
+    ]
   )
 }
 var staticRenderFns = []
@@ -12980,7 +13033,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-339e0c",
+            _scopeId: "data-v-80bc00",
             functional: undefined
           };
         })());
@@ -12993,9 +13046,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$339e0c', $339e0c);
+            api.createRecord('$80bc00', $80bc00);
           } else {
-            api.reload('$339e0c', $339e0c);
+            api.reload('$80bc00', $80bc00);
           }
         }
 
@@ -13139,7 +13192,11 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "56342" + '/');
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50795" + '/');
+>>>>>>> 3d02bc24e07752dfa4875bfd6d1860745f2033e1
 
   ws.onmessage = function (event) {
     checkedAssets = {};
