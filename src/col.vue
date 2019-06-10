@@ -80,6 +80,7 @@ export default {
   .col{
     height: 100px;
     width: 50%;
+    background-color: #41e4c7;
     $class-prefix: col-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n}{

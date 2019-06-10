@@ -38,7 +38,7 @@
 <div id="app">
   <!-- 布局 -->
   <div style="border: 1px solid black;">
-    <g-row gutter="20">
+    <g-row gutter="20" :align="left">
       <g-col span="2"
       :ipad="{span: 8}"
       :narrow-pc="{span: 4}"
@@ -50,6 +50,15 @@
       :narrow-pc="{span: 20}"
       :pc="{span: 22}"
       :wide-pc="{span: 23}"
+      >34</g-col>
+    </g-row>
+  </div>
+
+  <div style="border: 1px solid black;">
+    <g-row gutter="20">
+      <g-col span="10"
+      >23</g-col>
+      <g-col span="10" offset="4"
       >34</g-col>
     </g-row>
   </div>
