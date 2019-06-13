@@ -32,11 +32,27 @@ new Vue({
         console.log(e.target.value)
       },
       showToast(){
-        this.$toast('我是message')
+        this.$toast('我是 哈哈哈', {
+          closeButton: {
+            text: '知道了',
+            callback() {
+              console.log('用户说他知道了')
+            }
+          }
+        })
       }
     },
     created(){
-      // this.$toast('我是message')
+      this.$toast('<p>123</p><p>123</p><p>123</p><p>123</p><p>123</p>', {
+        enableHtml: false,
+        autoClose: false,
+        closeButton: {
+          text: '知道了',
+          callback() {
+            console.log('用户说他知道了')
+          }
+        }
+      })
     }
 })
 

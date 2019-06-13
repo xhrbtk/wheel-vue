@@ -13132,8 +13132,73 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
 var _default = {
-  name: 'WheelToast'
+  name: 'WheelToast',
+  props: {
+    autoClose: {
+      type: Boolean,
+      default: true
+    },
+    autoCloseDelay: {
+      type: Number,
+      default: 50
+    },
+    closeButton: {
+      type: Object,
+      default: function _default() {
+        return {
+          text: '关闭',
+          calback: undefined
+        };
+      }
+    },
+    enableHtml: {
+      type: Boolean,
+      default: false
+    }
+  },
+  mounted: function mounted() {
+    this.updateStyles();
+    this.execAutoClose();
+  },
+  created: function created() {},
+  methods: {
+    updateStyles: function updateStyles() {
+      var _this = this;
+
+      this.$nextTick(function () {
+        _this.$refs.line.style.height = _this.$refs.toast.getBoundingClientRect().height + 'px';
+      });
+    },
+    execAutoClose: function execAutoClose() {
+      var _this2 = this;
+
+      if (this.autoClose) {
+        setTimeout(function () {
+          _this2.close();
+        }, this.autoClose * 1000);
+      }
+    },
+    close: function close() {
+      this.$el.remove(); //把元素remove掉
+
+      this.$destroy(); //死掉
+    },
+    onClickClose: function onClickClose() {
+      this.close();
+
+      if (this.closeButton && typeof this.closeButton.callback === 'function') {
+        this.closeButton.callback();
+      }
+
+      this.closeButton.callback(this); //this === toast实例
+    }
+  }
 };
 exports.default = _default;
         var $d03bb6 = exports.default || module.exports;
@@ -13148,7 +13213,28 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "toast" }, [_vm._t("default")], 2)
+  return _c("div", { ref: "toast", staticClass: "toast" }, [
+    _c(
+      "div",
+      { staticClass: "message" },
+      [
+        !_vm.enableHtml
+          ? _vm._t("default")
+          : _c("div", {
+              domProps: { innerHTML: _vm._s(_vm.$slots.default[0]) }
+            })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("div", { ref: "line", staticClass: "line" }),
+    _vm._v(" "),
+    _vm.closeButton
+      ? _c("span", { staticClass: "close", on: { click: _vm.onClickClose } }, [
+          _vm._v(_vm._s(_vm.closeButton.text))
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -13197,10 +13283,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _default = {
   install: function install(Vue, options) {
-    Vue.prototype.$toast = function (message) {
+    Vue.prototype.$toast = function (message, toastOptions) {
       // 动态创建实例 生成一个toast组件
       var Constructor = Vue.extend(_toast.default);
-      var toast = new Constructor();
+      var toast = new Constructor({
+        propsData: {
+          enableHtml: toastOptions.enableHtml,
+          closeButton: toastOptions.closeButton,
+          autoClose: toastOptions.autoClose
+        }
+      });
+      console.log(toastOptions);
       toast.$slots.default = [message];
       toast.$mount();
       document.body.appendChild(toast.$el);
@@ -13260,10 +13353,27 @@ new _vue.default({
       console.log(e.target.value);
     },
     showToast: function showToast() {
-      this.$toast('我是message');
+      this.$toast('我是 哈哈哈', {
+        closeButton: {
+          text: '知道了',
+          callback: function callback() {
+            console.log('用户说他知道了');
+          }
+        }
+      });
     }
   },
-  created: function created() {// this.$toast('我是message')
+  created: function created() {
+    this.$toast('<p>123</p><p>123</p><p>123</p><p>123</p><p>123</p>', {
+      enableHtml: false,
+      autoClose: false,
+      closeButton: {
+        text: '知道了',
+        callback: function callback() {
+          console.log('用户说他知道了');
+        }
+      }
+    });
   }
 }); // 单元测试
 // import chai from 'chai'
@@ -13354,7 +13464,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63498" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61196" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
