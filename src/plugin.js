@@ -8,7 +8,8 @@ export default{
         propsData: {
           enableHtml: toastOptions.enableHtml,
           closeButton: toastOptions.closeButton,
-          autoClose: toastOptions.autoClose
+          autoClose: toastOptions.autoClose,
+          position: toastOptions.position
         }
       })
       console.log(toastOptions)

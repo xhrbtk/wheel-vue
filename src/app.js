@@ -43,13 +43,14 @@ new Vue({
       }
     },
     created(){
-      this.$toast('<p>123</p><p>123</p><p>123</p><p>123</p><p>123</p>', {
+      this.$toast('你的智商需要充值！', {
+        position: 'top',
         enableHtml: false,
         autoClose: false,
         closeButton: {
-          text: '知道了',
+          text: '已充值',
           callback() {
-            console.log('用户说他知道了')
+            console.log('用户说他已经充值了')
           }
         }
       })
