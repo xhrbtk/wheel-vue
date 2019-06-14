@@ -33,7 +33,7 @@ new Vue({
       },
       showToast(){
         this.$toast(`你的智商目前为 ${Math.random() * 100}`, {
-          position: 'middle',
+          position: 'bottom',
           enableHtml: false,
           autoClose: false,
           closeButton: {

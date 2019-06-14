@@ -13140,6 +13140,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 var _default = {
   name: 'WheelToast',
   props: {
@@ -13229,10 +13231,8 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { ref: "toast", staticClass: "toast", class: _vm.toastClasses },
-    [
+  return _c("div", { staticClass: "wrapper", class: _vm.toastClasses }, [
+    _c("div", { ref: "toast", staticClass: "toast" }, [
       _c(
         "div",
         { staticClass: "message" },
@@ -13255,8 +13255,8 @@ exports.default = _default;
             [_vm._v(_vm._s(_vm.closeButton.text))]
           )
         : _vm._e()
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -13396,7 +13396,7 @@ new _vue.default({
     },
     showToast: function showToast() {
       this.$toast("\u4F60\u7684\u667A\u5546\u76EE\u524D\u4E3A ".concat(Math.random() * 100), {
-        position: 'middle',
+        position: 'bottom',
         enableHtml: false,
         autoClose: false,
         closeButton: {
@@ -13498,7 +13498,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49348" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52664" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
