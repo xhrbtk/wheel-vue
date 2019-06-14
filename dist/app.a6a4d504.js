@@ -13202,6 +13202,7 @@ var _default = {
     close: function close() {
       this.$el.remove(); //把元素remove掉
 
+      this.$emit('close');
       this.$destroy(); //死掉
     },
     onClickClose: function onClickClose() {
@@ -13315,7 +13316,10 @@ var _default = {
       currentToast = createToast({
         Vue: Vue,
         message: message,
-        propsData: toastOptions
+        propsData: toastOptions,
+        onClose: function onClose() {
+          currentToast = null;
+        }
       }); //es6语法
     };
   }
@@ -13326,13 +13330,16 @@ exports.default = _default;
 function createToast(_ref) {
   var Vue = _ref.Vue,
       message = _ref.message,
-      propsData = _ref.propsData;
+      propsData = _ref.propsData,
+      onClose = _ref.onClose;
   var Constructor = Vue.extend(_toast.default);
   var toast = new Constructor({
     propsData: propsData
   });
   toast.$slots.default = [message];
-  toast.$mount();
+  toast.$mount(); // 回调函数 如果已经手动关闭了 执行回调
+
+  toast.$on('close', onClose);
   document.body.appendChild(toast.$el);
   return toast;
 }
@@ -13491,7 +13498,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63853" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49348" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
