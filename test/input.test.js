@@ -33,7 +33,6 @@ describe('Input', () => {
         }
       }).$mount()
       const inputElement = vm.$el.querySelector('input')
-      console.log(inputElement.outerHTML)
       expect(inputElement.disabled).to.equal(true)
     })
 
@@ -44,7 +43,6 @@ describe('Input', () => {
         }
       }).$mount()
       const inputElement = vm.$el.querySelector('input')
-      console.log(inputElement.outerHTML)
       expect(inputElement.readOnly).to.equal(true)
     })
 

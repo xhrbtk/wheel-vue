@@ -6,84 +6,85 @@
         <div v-else v-html="$slots.default[0]"></div>
       </div>
       <div class="line" ref="line"></div>
-      <span class="close" v-if="closeButton" @click="onClickClose">{{closeButton.text}}</span>
+      <span class="close" v-if="closeButton" @click="onClickClose">
+        {{closeButton.text}}
+      </span>
     </div>
   </div>
 </template>
 <script>
-export default {
-  name: 'WheelToast',
-  props: {
-    autoClose: {
-      type: Boolean,
-      default: true
-    },
-    autoCloseDelay: {
-      type: Number,
-      default: 50
-    },
-    closeButton: {
-      type: Object,
-      default() {
+  //构造组件的选项
+  export default {
+    name: 'GuluToast',
+    props: {
+      autoClose: {
+        type: [Boolean, Number],
+        default: 5,
+        validator (value) {
+          return value === false || typeof value === 'number';
+        }
+      },
+      closeButton: {
+        type: Object,
+        default () {
           return {
-            text: '关闭', calback: undefined
+            text: '关闭', callback: undefined
           }
         }
-    },
-    enableHtml: {
-      type: Boolean,
-      default: false
-    },
-    position: {
-      type: String,
-      default: 'top',
-      validator (value){
-        return ['top', 'bottom', 'middle'].indexOf(value) >= 0
+      },
+      enableHtml: {
+        type: Boolean,
+        default: false
+      },
+      position: {
+        type: String,
+        default: 'top',
+        validator (value) {
+          return ['top', 'bottom', 'middle'].indexOf(value) >= 0
+        }
       }
-    }
-  },
-  mounted () {
-    this.updateStyles()
-    this.execAutoClose()
-
-  },
-  computed: {
-    toastClasses(){
-      return {
-        [`position-${this.position}`] : true
-      }
-    }
-  },
-  created () {
-
-  },
-  methods: {
-    updateStyles () {
-      this.$nextTick(() => {
-        this.$refs.line.style.height = this.$refs.toast.getBoundingClientRect().height + 'px'
-      })
     },
-    execAutoClose () {
-      if (this.autoClose) {
+    mounted () {
+      this.updateStyles()
+      this.execAutoClose()
+    },
+    computed: {
+      toastClasses () {
+        return {
+          [`position-${this.position}`]: true
+        }
+      }
+    },
+    methods: {
+      updateStyles () {
+        // this.$nextTick(() => {
+        //   this.$refs.line.style.height = this.$refs.toast.getBoundingClientRect().height + 'px'
+        // })
+        // 在做测试用例的时候用nextTick会出错 所以选择用setTimeout
         setTimeout(() => {
-          this.close()
-        }, this.autoClose * 1000)
+          this.$refs.line.style.height = this.$refs.toast.getBoundingClientRect().height + 'px'
+        }, 800)
+      },
+      execAutoClose () {
+        if (this.autoClose) {
+          setTimeout(() => {
+            this.close()
+          }, this.autoClose * 1000)
+        }
+      },
+      close () {
+        this.$el.remove()
+        this.$emit('close')
+        this.$destroy()
+      },
+      onClickClose () {
+        this.close()
+        if (this.closeButton && typeof this.closeButton.callback === 'function') {
+          this.closeButton.callback(this)//this === toast实例
+        }
       }
-    },
-    close(){
-      this.$el.remove() //把元素remove掉
-      this.$emit('close')
-      this.$destroy()  //死掉
-    },
-    onClickClose(){
-      this.close()
-      if(this.closeButton && typeof this.closeButton.callback === 'function'){
-        this.closeButton.callback()
-      }
-      this.closeButton.callback(this) //this === toast实例
     }
   }
-}
 </script>
 <style lang="scss" scoped>
 
