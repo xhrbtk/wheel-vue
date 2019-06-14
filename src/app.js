@@ -32,28 +32,21 @@ new Vue({
         console.log(e.target.value)
       },
       showToast(){
-        this.$toast('我是 哈哈哈', {
+        this.$toast(`你的智商目前为 ${Math.random() * 100}`, {
+          position: 'middle',
+          enableHtml: false,
+          autoClose: false,
           closeButton: {
-            text: '知道了',
+            text: '已充值',
             callback() {
-              console.log('用户说他知道了')
+              console.log('用户说他已经充值了')
             }
           }
         })
       }
     },
     created(){
-      this.$toast('你的智商需要充值！', {
-        position: 'top',
-        enableHtml: false,
-        autoClose: false,
-        closeButton: {
-          text: '已充值',
-          callback() {
-            console.log('用户说他已经充值了')
-          }
-        }
-      })
+
     }
 })
 

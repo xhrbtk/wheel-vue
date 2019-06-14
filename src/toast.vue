@@ -43,6 +43,7 @@ export default {
   mounted () {
     this.updateStyles()
     this.execAutoClose()
+
   },
   computed: {
     toastClasses(){
@@ -52,7 +53,6 @@ export default {
     }
   },
   created () {
-    console.log(this.position)
 
   },
   methods: {

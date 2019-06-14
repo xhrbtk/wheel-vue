@@ -13181,9 +13181,7 @@ var _default = {
       return _defineProperty({}, "position-".concat(this.position), true);
     }
   },
-  created: function created() {
-    console.log(this.position);
-  },
+  created: function created() {},
   methods: {
     updateStyles: function updateStyles() {
       var _this = this;
@@ -13304,27 +13302,40 @@ var _toast = _interopRequireDefault(require("./toast"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var currentToast;
 var _default = {
   install: function install(Vue, options) {
     Vue.prototype.$toast = function (message, toastOptions) {
       // 动态创建实例 生成一个toast组件
-      var Constructor = Vue.extend(_toast.default);
-      var toast = new Constructor({
-        propsData: {
-          enableHtml: toastOptions.enableHtml,
-          closeButton: toastOptions.closeButton,
-          autoClose: toastOptions.autoClose,
-          position: toastOptions.position
-        }
-      });
-      console.log(toastOptions);
-      toast.$slots.default = [message];
-      toast.$mount();
-      document.body.appendChild(toast.$el);
+      if (currentToast) {
+        // 如果当前已经有一个toast 当再次点击的时候 将当前的关掉之后再生成新的toast
+        currentToast.close();
+      }
+
+      currentToast = createToast({
+        Vue: Vue,
+        message: message,
+        propsData: toastOptions
+      }); //es6语法
     };
   }
-};
+}; // heplers  生成toast
+
 exports.default = _default;
+
+function createToast(_ref) {
+  var Vue = _ref.Vue,
+      message = _ref.message,
+      propsData = _ref.propsData;
+  var Constructor = Vue.extend(_toast.default);
+  var toast = new Constructor({
+    propsData: propsData
+  });
+  toast.$slots.default = [message];
+  toast.$mount();
+  document.body.appendChild(toast.$el);
+  return toast;
+}
 },{"./toast":"src/toast.vue"}],"src/app.js":[function(require,module,exports) {
 "use strict";
 
@@ -13377,29 +13388,20 @@ new _vue.default({
       console.log(e.target.value);
     },
     showToast: function showToast() {
-      this.$toast('我是 哈哈哈', {
+      this.$toast("\u4F60\u7684\u667A\u5546\u76EE\u524D\u4E3A ".concat(Math.random() * 100), {
+        position: 'middle',
+        enableHtml: false,
+        autoClose: false,
         closeButton: {
-          text: '知道了',
+          text: '已充值',
           callback: function callback() {
-            console.log('用户说他知道了');
+            console.log('用户说他已经充值了');
           }
         }
       });
     }
   },
-  created: function created() {
-    this.$toast('你的智商需要充值！', {
-      position: 'top',
-      enableHtml: false,
-      autoClose: false,
-      closeButton: {
-        text: '已充值',
-        callback: function callback() {
-          console.log('用户说他已经充值了');
-        }
-      }
-    });
-  }
+  created: function created() {}
 }); // 单元测试
 // import chai from 'chai'
 // import spies from 'chai-spies'
@@ -13489,7 +13491,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58758" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63853" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
