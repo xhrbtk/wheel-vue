@@ -37,6 +37,10 @@ export default {
 
     // 这个组件必须触发一个selected值
     // this.$emit('updata:selected', 'xxx')
+  },
+  mounted () {
+    console.log(`这是被选中${this.selected}`)
+    this.eventBus.$emit('update:selected', this.selected)
   }
 }
 </script>

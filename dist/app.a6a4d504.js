@@ -13390,6 +13390,10 @@ var _default = {
     console.log(this.selected);
     console.log(this.eventBus); // 这个组件必须触发一个selected值
     // this.$emit('updata:selected', 'xxx')
+  },
+  mounted: function mounted() {
+    console.log("\u8FD9\u662F\u88AB\u9009\u4E2D".concat(this.selected));
+    this.eventBus.$emit('update:selected', this.selected);
   }
 };
 exports.default = _default;
@@ -13612,6 +13616,7 @@ var _default = {
       active: false
     };
   },
+  // props相当于函数传参  data相当于函数内部自定义的数据
   props: {
     disabled: {
       type: Boolean,
@@ -13630,11 +13635,10 @@ var _default = {
   created: function created() {
     var _this = this;
 
-    if (this.eventBus) {
-      this.eventBus.$on('update:selected', function (name) {
-        _this.active = name === _this.name;
-      });
-    }
+    this.eventBus.$on('updata:selected', function (name) {
+      console.log(_this.name + '被选中了');
+      _this.active = name === _this.name;
+    });
   },
   computed: {
     classes: function classes() {
@@ -13969,7 +13973,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56900" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54950" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

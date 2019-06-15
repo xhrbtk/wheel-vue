@@ -12,6 +12,7 @@ export default {
       active: false
     }
   },
+  // props相当于函数传参  data相当于函数内部自定义的数据
   props: {
     disabled: {
       type: Boolean,
@@ -28,11 +29,10 @@ export default {
     }
   },
   created () {
-    if (this.eventBus) {
-      this.eventBus.$on('update:selected', (name) => {
-        this.active = name === this.name;
-      })
-    }
+    this.eventBus.$on('updata:selected', (name) => {
+      console.log(this.name + '被选中了')
+      this.active = name === this.name
+    })
   },
   computed: {
     classes() {
