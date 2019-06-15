@@ -57,13 +57,13 @@
     },
     methods: {
       updateStyles () {
-        // this.$nextTick(() => {
-        //   this.$refs.line.style.height = this.$refs.toast.getBoundingClientRect().height + 'px'
-        // })
-        // 在做测试用例的时候用nextTick会出错 所以选择用setTimeout
-        setTimeout(() => {
+        this.$nextTick(() => {
           this.$refs.line.style.height = this.$refs.toast.getBoundingClientRect().height + 'px'
-        }, 800)
+        })
+        // 在做测试用例的时候用nextTick会出错 所以选择用setTimeout
+        // setTimeout(() => {
+        //   this.$refs.line.style.height = this.$refs.toast.getBoundingClientRect().height + 'px'
+        // }, 800)
       },
       execAutoClose () {
         if (this.autoClose) {

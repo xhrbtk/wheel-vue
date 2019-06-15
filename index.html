@@ -88,6 +88,50 @@
       <g-button icon="right-arrow" icon-position="right">下一页</g-button>
     </g-button-group>
   </div>
+
+  <!-- tabs -->
+    <g-tabs :selected.sync="selectedTab">
+      <!-- 等价关系 -->
+    <!-- <g-tabs selected="selectedTab" @update:selected="selectedTab = $event"> -->
+      <g-tabs-head>
+        <template slot="actions">
+          <button>设置</button>
+        </template>
+        <g-tabs-item name="woman">
+          <g-icon name="shezhi"></g-icon>
+          美女
+        </g-tabs-item>
+      </g-tbas-head>
+
+      <g-tabs-head>
+        <g-tabs-item name="finance" disabled>
+          财经
+        </g-tabs-item>
+      </g-tabs-head>
+
+      <g-tabs-head>
+        <g-tabs-item name="sports">
+          体育
+        </g-tabs-item>
+      </g-tabs-head>
+
+      <g-tabs-body>
+        <g-tabs-pane name="woman">
+          美女相关
+        </g-tabs-pane>
+        <g-tabs-pane name="finance">
+          财经相关
+        </g-tabs-pane>
+        <g-tabs-pane name="sports">
+          体育相关
+        </g-tabs-pane>
+      </g-tabs-body>
+
+
+    </g-tabs>
+
+
+
 </div>
 <script src="./src/app.js"></script>
 <!-- <script src="//at.alicdn.com/t/font_1155046_888pzyyqd9b.js"></script> -->
