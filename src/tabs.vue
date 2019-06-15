@@ -31,7 +31,9 @@ export default {
     }
   },
   created () {
-    console.log(this.eventBus);
+    console.log(this.selected)
+
+    console.log(this.eventBus)
 
     // 这个组件必须触发一个selected值
     // this.$emit('updata:selected', 'xxx')
