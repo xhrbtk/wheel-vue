@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+import Vue from 'vue'
 export default {
   name: 'wheelTabs',
   props: {
@@ -19,7 +20,19 @@ export default {
       }
     }
   },
+  data () {
+    return {
+      eventBus: new Vue()
+    }
+  },
+  provide () {
+    return {
+      eventBus: this.eventBus
+    }
+  },
   created () {
+    console.log(this.eventBus);
+
     // 这个组件必须触发一个selected值
     // this.$emit('updata:selected', 'xxx')
   }

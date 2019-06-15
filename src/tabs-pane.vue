@@ -5,7 +5,13 @@
 </template>
 <script>
 export default {
-  name: 'wheelTabsPane'
+  inject: ['eventBus'],
+  name: 'wheelTabsPane',
+  created () {
+    this.eventBus.$on('updata:selected', (name) => {
+      console.log(name)
+    })
+  }
 }
 </script>
 <style lang="scss" scoped>

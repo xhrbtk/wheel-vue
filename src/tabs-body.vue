@@ -5,7 +5,14 @@
 </template>
 <script>
 export default {
-  name: 'wheelTabsBody'
+  inject: ['eventBus'],
+  name: 'wheelTabsBody',
+  created () {
+    console.log(this.eventBus)
+
+    console.log('爷爷给body的eventbus')
+
+  }
 }
 </script>
 <style lang="scss" scoped>

@@ -6,7 +6,14 @@
 </template>
 <script>
 export default {
-  name: 'wheelTabsHead'
+  name: 'wheelTabsHead',
+  inject: ['eventBus'],
+  created () {
+    console.log('爷爷给head的eventBus');
+
+    console.log(this.eventBus)
+
+  }
 }
 </script>
 <style lang="scss" scoped>

@@ -13351,6 +13351,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _vue = _interopRequireDefault(require("vue"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //
 //
 //
@@ -13371,7 +13376,18 @@ var _default = {
       }
     }
   },
-  created: function created() {// 这个组件必须触发一个selected值
+  data: function data() {
+    return {
+      eventBus: new _vue.default()
+    };
+  },
+  provide: function provide() {
+    return {
+      eventBus: this.eventBus
+    };
+  },
+  created: function created() {
+    console.log(this.eventBus); // 这个组件必须触发一个selected值
     // this.$emit('updata:selected', 'xxx')
   }
 };
@@ -13423,7 +13439,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/tabs-head.vue":[function(require,module,exports) {
+},{"vue":"node_modules/vue/dist/vue.common.js","_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js"}],"src/tabs-head.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13437,7 +13453,12 @@ exports.default = void 0;
 //
 //
 var _default = {
-  name: 'wheelTabsHead'
+  name: 'wheelTabsHead',
+  inject: ['eventBus'],
+  created: function created() {
+    console.log('爷爷给head的eventBus');
+    console.log(this.eventBus);
+  }
 };
 exports.default = _default;
         var $f398a8 = exports.default || module.exports;
@@ -13505,7 +13526,12 @@ exports.default = void 0;
 //
 //
 var _default = {
-  name: 'wheelTabsBody'
+  inject: ['eventBus'],
+  name: 'wheelTabsBody',
+  created: function created() {
+    console.log(this.eventBus);
+    console.log('爷爷给body的eventbus');
+  }
 };
 exports.default = _default;
         var $e00090 = exports.default || module.exports;
@@ -13569,11 +13595,28 @@ exports.default = void 0;
 //
 var _default = {
   name: 'wheelTabsItem',
+  inject: ['eventBus'],
   props: {
     disabled: {
       type: Boolean,
       default: false
+    },
+    name: {
+      type: String | Number,
+      required: true
     }
+  },
+  methods: {
+    xxx: function xxx() {
+      this.eventBus.$emit('updata:selected', this.name);
+    }
+  },
+  created: function created() {
+    console.log('爷爷给item的eventBus');
+    console.log(this.eventBus);
+    this.eventBus.$on('updata:selected', function (name) {
+      console.log(name);
+    });
   }
 };
 exports.default = _default;
@@ -13589,7 +13632,12 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "tabs-item" }, [_vm._t("default")], 2)
+  return _c(
+    "div",
+    { staticClass: "tabs-item", on: { click: _vm.xxx } },
+    [_vm._t("default")],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -13637,7 +13685,13 @@ exports.default = void 0;
 //
 //
 var _default = {
-  name: 'wheelTabsPane'
+  inject: ['eventBus'],
+  name: 'wheelTabsPane',
+  created: function created() {
+    this.eventBus.$on('updata:selected', function (name) {
+      console.log(name);
+    });
+  }
 };
 exports.default = _default;
         var $88d5e1 = exports.default || module.exports;
@@ -13863,7 +13917,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54542" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55724" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
