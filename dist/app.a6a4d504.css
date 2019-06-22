@@ -942,21 +942,28 @@
   height: 40px;
   justify-content: flex-start;
   border: 1px solid red;
+  position: relative;
 }
 .tabs-head > .actions-wrapper[data-v-f398a8] {
   margin-left: auto;
+}
+.tabs-head > .line[data-v-f398a8] {
+  position: absolute;
+  bottom: 0;
+  border-bottom: 1px solid blue;
+  width: 100px;
 }
 .tabs-item[data-v-a95cfb] {
   flex-shrink: 0;
   padding: 0 2em;
   cursor: pointer;
-  border: 1px solid green;
   height: 100%;
   display: flex;
   align-items: center;
 }
 .tabs-item.active[data-v-a95cfb] {
-  background: red;
+  color: blue;
+  font-weight: bold;
 }
 .tabs-pane.active[data-v-88d5e1] {
   background: red;

@@ -31,14 +31,22 @@ export default {
     }
   },
   created () {
-    console.log(this.selected)
-    console.log(this.eventBus)
     // 这个组件必须触发一个selected值
     // this.$emit('updata:selected', 'xxx')
   },
   mounted () {
-    console.log(`这是被选中${this.selected}`)
-    this.eventBus.$emit('update:selected', this.selected)
+    console.log(this.$children);
+    this.$children.forEach((vm) => {
+      // console.log(vm.$options.name);
+      if(vm.$options.name === 'wheelTabsHead'){
+        vm.$children.forEach((item) => {
+          if(item.$options.name === 'wheelTabsItem' && item.name === this.selected){
+            // console.log(item.$el)
+            this.eventBus.$emit('update:selected', this.selected, item)
+          }
+        })
+      }
+    })
   }
 }
 </script>

@@ -13386,14 +13386,24 @@ var _default = {
       eventBus: this.eventBus
     };
   },
-  created: function created() {
-    console.log(this.selected);
-    console.log(this.eventBus); // 这个组件必须触发一个selected值
+  created: function created() {// 这个组件必须触发一个selected值
     // this.$emit('updata:selected', 'xxx')
   },
   mounted: function mounted() {
-    console.log("\u8FD9\u662F\u88AB\u9009\u4E2D".concat(this.selected));
-    this.eventBus.$emit('update:selected', this.selected);
+    var _this = this;
+
+    console.log(this.$children);
+    this.$children.forEach(function (vm) {
+      // console.log(vm.$options.name);
+      if (vm.$options.name === 'wheelTabsHead') {
+        vm.$children.forEach(function (item) {
+          if (item.$options.name === 'wheelTabsItem' && item.name === _this.selected) {
+            // console.log(item.$el)
+            _this.eventBus.$emit('update:selected', _this.selected, item);
+          }
+        });
+      }
+    });
   }
 };
 exports.default = _default;
@@ -13459,6 +13469,7 @@ exports.default = void 0;
 //
 //
 //
+//
 var _default = {
   name: 'wheelTabsHead',
   inject: ['eventBus'],
@@ -13468,7 +13479,9 @@ var _default = {
     };
   },
   created: function created() {
-    console.log('爷爷给head的eventBus');
+    this.eventBus.$on('update:selected', function (item, vm) {
+      console.log(item, vm);
+    });
   }
 };
 exports.default = _default;
@@ -13489,6 +13502,8 @@ exports.default = _default;
     { staticClass: "tabs-head" },
     [
       _vm._t("default"),
+      _vm._v(" "),
+      _c("div", { ref: "line", staticClass: "line" }),
       _vm._v(" "),
       _c("div", { staticClass: "actions-wrapper" }, [_vm._t("actions")], 2)
     ],
@@ -13543,10 +13558,7 @@ exports.default = void 0;
 var _default = {
   inject: ['eventBus'],
   name: 'wheelTabsBody',
-  created: function created() {
-    console.log(this.eventBus);
-    console.log('爷爷给body的eventbus');
-  }
+  created: function created() {}
 };
 exports.default = _default;
         var $e00090 = exports.default || module.exports;
@@ -13629,14 +13641,13 @@ var _default = {
   },
   methods: {
     xxx: function xxx() {
-      this.eventBus.$emit('update:selected', this.name);
+      this.eventBus.$emit('update:selected', this.name, this);
     }
   },
   created: function created() {
     var _this = this;
 
     this.eventBus.$on('update:selected', function (name) {
-      console.log(_this.name + '被选中了');
       _this.active = name === _this.name;
     });
   },
@@ -13973,7 +13984,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58789" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60215" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

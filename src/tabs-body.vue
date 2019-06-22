@@ -8,8 +8,6 @@ export default {
   inject: ['eventBus'],
   name: 'wheelTabsBody',
   created () {
-    console.log(this.eventBus)
-    console.log('爷爷给body的eventbus')
   }
 }
 </script>
