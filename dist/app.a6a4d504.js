@@ -13386,19 +13386,17 @@ var _default = {
       eventBus: this.eventBus
     };
   },
-  created: function created() {// 这个组件必须触发一个selected值
-    // this.$emit('updata:selected', 'xxx')
-  },
   mounted: function mounted() {
     var _this = this;
 
-    // console.log(this.$children);
+    if (this.$children.length === 0) {
+      console && console.warn && console.warn('tabs的子组件应该是tabs-head和tabs-nav，但你没有写子组件');
+    }
+
     this.$children.forEach(function (vm) {
-      // console.log(vm.$options.name);
       if (vm.$options.name === 'wheelTabsHead') {
         vm.$children.forEach(function (childVm) {
           if (childVm.$options.name === 'wheelTabsItem' && childVm.name === _this.selected) {
-            // console.log(item.$el)
             _this.eventBus.$emit('update:selected', _this.selected, childVm);
           }
         });
@@ -13428,7 +13426,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-8bb44d",
+            _scopeId: null,
             functional: undefined
           };
         })());
@@ -13665,9 +13663,11 @@ var _default = {
   created: function created() {
     var _this = this;
 
-    this.eventBus.$on('update:selected', function (name) {
-      _this.active = name === _this.name;
-    });
+    if (this.eventBus) {
+      this.eventBus.$on('update:selected', function (name) {
+        _this.active = name === _this.name;
+      });
+    }
   },
   computed: {
     classes: function classes() {
@@ -13696,6 +13696,7 @@ exports.default = _default;
     {
       staticClass: "tabs-item",
       class: _vm.classes,
+      attrs: { "data-name": _vm.name },
       on: { click: _vm.onClick }
     },
     [_vm._t("default")],
@@ -13897,7 +13898,7 @@ new _vue.default({
     loading2: false,
     loading3: false,
     message: 'hi',
-    selectedTab: 'woman'
+    selectedTab: 'finance'
   },
   methods: {
     inputChange: function inputChange(e) {
@@ -14007,7 +14008,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61172" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58884" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

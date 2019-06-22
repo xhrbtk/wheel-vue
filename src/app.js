@@ -38,7 +38,7 @@ new Vue({
       loading2: false,
       loading3: false,
       message: 'hi',
-      selectedTab: 'woman'
+      selectedTab: 'finance'
     },
     methods: {
       inputChange(e){
