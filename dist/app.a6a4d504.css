@@ -941,10 +941,14 @@
   display: flex;
   height: 40px;
   justify-content: flex-start;
+  border-bottom: 1px solid #ddd;
   position: relative;
 }
 .tabs-head > .actions-wrapper[data-v-f398a8] {
   margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .tabs-head > .line[data-v-f398a8] {
   position: absolute;
@@ -963,4 +967,7 @@
 .tabs-item.active[data-v-a95cfb] {
   color: blue;
   font-weight: bold;
+}
+.tabs-pane[data-v-88d5e1] {
+  padding: 0 1em;
 }
