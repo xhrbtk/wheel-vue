@@ -19,7 +19,7 @@ export default {
     }
   },
   created () {
-    this.eventBus.$on('updata:selected', (name) => {
+    this.eventBus.$on('update:selected', (name) => {
       this.active = name === this.name
     })
   },
@@ -39,4 +39,3 @@ export default {
   }
 }
 </style>
-

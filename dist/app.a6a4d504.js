@@ -13146,7 +13146,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //构造组件的选项
 var _default = {
-  name: 'GuluToast',
+  name: 'WheelToast',
   props: {
     autoClose: {
       type: [Boolean, Number],
@@ -13629,13 +13629,13 @@ var _default = {
   },
   methods: {
     xxx: function xxx() {
-      this.eventBus.$emit('updata:selected', this.name);
+      this.eventBus.$emit('update:selected', this.name);
     }
   },
   created: function created() {
     var _this = this;
 
-    this.eventBus.$on('updata:selected', function (name) {
+    this.eventBus.$on('update:selected', function (name) {
       console.log(_this.name + '被选中了');
       _this.active = name === _this.name;
     });
@@ -13730,7 +13730,7 @@ var _default = {
   created: function created() {
     var _this = this;
 
-    this.eventBus.$on('updata:selected', function (name) {
+    this.eventBus.$on('update:selected', function (name) {
       _this.active = name === _this.name;
     });
   },
@@ -13973,7 +13973,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54950" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63963" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

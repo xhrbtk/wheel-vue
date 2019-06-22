@@ -25,11 +25,11 @@ export default {
   },
   methods: {
     xxx () {
-      this.eventBus.$emit('updata:selected', this.name)
+      this.eventBus.$emit('update:selected', this.name)
     }
   },
   created () {
-    this.eventBus.$on('updata:selected', (name) => {
+    this.eventBus.$on('update:selected', (name) => {
       console.log(this.name + '被选中了')
       this.active = name === this.name
     })
@@ -52,4 +52,3 @@ export default {
   }
 }
 </style>
-
