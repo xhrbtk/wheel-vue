@@ -941,7 +941,6 @@
   display: flex;
   height: 40px;
   justify-content: flex-start;
-  align-items: center;
   border: 1px solid red;
 }
 .tabs-head > .actions-wrapper[data-v-f398a8] {
@@ -950,6 +949,11 @@
 .tabs-item[data-v-a95cfb] {
   flex-shrink: 0;
   padding: 0 2em;
+  cursor: pointer;
+  border: 1px solid green;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 .tabs-item.active[data-v-a95cfb] {
   background: red;
