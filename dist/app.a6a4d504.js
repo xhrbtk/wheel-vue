@@ -13392,14 +13392,14 @@ var _default = {
   mounted: function mounted() {
     var _this = this;
 
-    console.log(this.$children);
+    // console.log(this.$children);
     this.$children.forEach(function (vm) {
       // console.log(vm.$options.name);
       if (vm.$options.name === 'wheelTabsHead') {
-        vm.$children.forEach(function (item) {
-          if (item.$options.name === 'wheelTabsItem' && item.name === _this.selected) {
+        vm.$children.forEach(function (childVm) {
+          if (childVm.$options.name === 'wheelTabsItem' && childVm.name === _this.selected) {
             // console.log(item.$el)
-            _this.eventBus.$emit('update:selected', _this.selected, item);
+            _this.eventBus.$emit('update:selected', _this.selected, childVm);
           }
         });
       }
@@ -13478,9 +13478,23 @@ var _default = {
       active: false
     };
   },
-  created: function created() {
+  mounted: function mounted() {
+    var _this = this;
+
     this.eventBus.$on('update:selected', function (item, vm) {
-      console.log(item, vm);
+      // console.log(item, vm.$el)
+      var _vm$$el$getBoundingCl = vm.$el.getBoundingClientRect(),
+          width = _vm$$el$getBoundingCl.width,
+          height = _vm$$el$getBoundingCl.height,
+          top = _vm$$el$getBoundingCl.top,
+          left = _vm$$el$getBoundingCl.left;
+
+      console.log(width);
+
+      _this.$nextTick(function () {
+        _this.$refs.line.style.width = width + 'px';
+        _this.$refs.line.style.left = left + 'px';
+      });
     });
   }
 };
@@ -13984,7 +13998,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60215" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56456" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

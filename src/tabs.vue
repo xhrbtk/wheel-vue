@@ -35,14 +35,14 @@ export default {
     // this.$emit('updata:selected', 'xxx')
   },
   mounted () {
-    console.log(this.$children);
+    // console.log(this.$children);
     this.$children.forEach((vm) => {
       // console.log(vm.$options.name);
       if(vm.$options.name === 'wheelTabsHead'){
-        vm.$children.forEach((item) => {
-          if(item.$options.name === 'wheelTabsItem' && item.name === this.selected){
+        vm.$children.forEach((childVm) => {
+          if(childVm.$options.name === 'wheelTabsItem' && childVm.name === this.selected){
             // console.log(item.$el)
-            this.eventBus.$emit('update:selected', this.selected, item)
+            this.eventBus.$emit('update:selected', this.selected, childVm)
           }
         })
       }

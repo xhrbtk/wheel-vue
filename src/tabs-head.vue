@@ -16,9 +16,16 @@ export default {
       active: false
     }
   },
-  created () {
+  mounted () {
     this.eventBus.$on('update:selected', (item, vm) => {
-      console.log(item, vm)
+      // console.log(item, vm.$el)
+      let {width, height, top, left} = vm.$el.getBoundingClientRect()
+      console.log(width)
+      this.$nextTick(() => {
+        this.$refs.line.style.width = width + 'px'
+        this.$refs.line.style.left = left + 'px'
+      })
+
     })
   }
 }
@@ -30,7 +37,6 @@ $blue: blue;
   display: flex;
   height: $tab-height;
   justify-content: flex-start;
-  border: 1px solid red;
   position: relative;
   > .actions-wrapper {
     margin-left: auto;
@@ -39,7 +45,8 @@ $blue: blue;
     position: absolute;
     bottom: 0;
     border-bottom: 1px solid $blue;
-    width: 100px;
+    // width: 100px;
+    transition: all 250ms;
   }
 }
 </style>
