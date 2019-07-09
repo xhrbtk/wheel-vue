@@ -13848,6 +13848,7 @@ exports.default = void 0;
 //
 //
 //
+//
 var _default = {
   name: 'WheelPopover',
   data: function data() {
@@ -13857,7 +13858,31 @@ var _default = {
   },
   methods: {
     xxx: function xxx() {
+      var _this = this;
+
       this.visible = !this.visible;
+
+      if (this.visible === true) {
+        this.$nextTick(function () {
+          var eventHandler = function eventHandler() {
+            _this.visible = false;
+            document.removeEventListener('click', eventHandler);
+          };
+
+          document.addEventListener('click', eventHandler);
+        });
+      } // 以下方法行不通
+      //   setTimeout(() => {
+      //     //  ()=>{} function x(){}.bind(this)
+      //     // x()是一个函数 x().bind(this) 是一个新的函数
+      //     document.addEventListener('click', function x(){
+      //       this.visible = false
+      //       document.removeEventListener('click', x)
+      //       console.log('点击document关闭popover')
+      //     }.bind(this))
+      //   }, 1000)
+      // }
+
     }
   }
 };
@@ -13876,10 +13901,30 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "popover", on: { click: _vm.xxx } },
+    {
+      staticClass: "popover",
+      on: {
+        click: function($event) {
+          $event.stopPropagation()
+          return _vm.xxx($event)
+        }
+      }
+    },
     [
       _vm.visible
-        ? _c("div", { staticClass: "content-wrapper" }, [_vm._t("content")], 2)
+        ? _c(
+            "div",
+            {
+              staticClass: "content-wrapper",
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                }
+              }
+            },
+            [_vm._t("content")],
+            2
+          )
         : _vm._e(),
       _vm._v(" "),
       _vm._t("default")
@@ -14100,7 +14145,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51401" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58905" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

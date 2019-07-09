@@ -1,6 +1,7 @@
 <template>
-  <div class="popover" @click="xxx">
-    <div class="content-wrapper" v-if="visible">
+  <div class="popover" @click.stop="xxx">
+    <!-- @click.stop 阻止冒泡 -->
+    <div class="content-wrapper" v-if="visible" @click.stop>
       <slot name="content"></slot>
     </div>
     <slot></slot>
@@ -15,6 +16,26 @@ export default {
   methods: {
     xxx() {
       this.visible = !this.visible
+      if(this.visible === true){
+        this.$nextTick(() => {
+          let eventHandler = () => {
+            this.visible = false
+            document.removeEventListener('click', eventHandler)
+          }
+          document.addEventListener('click', eventHandler)
+        })
+      }
+      // 以下方法行不通
+      //   setTimeout(() => {
+      //     //  ()=>{} function x(){}.bind(this)
+      //     // x()是一个函数 x().bind(this) 是一个新的函数
+      //     document.addEventListener('click', function x(){
+      //       this.visible = false
+      //       document.removeEventListener('click', x)
+      //       console.log('点击document关闭popover')
+      //     }.bind(this))
+      //   }, 1000)
+      // }
     }
   }
 }
