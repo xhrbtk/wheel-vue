@@ -13849,6 +13849,7 @@ exports.default = void 0;
 //
 //
 //
+//
 var _default = {
   name: 'WheelPopover',
   data: function data() {
@@ -13857,7 +13858,7 @@ var _default = {
     };
   },
   methods: {
-    xxx: function xxx() {
+    onClick: function onClick() {
       var _this = this;
 
       this.visible = !this.visible;
@@ -13865,6 +13866,15 @@ var _default = {
       if (this.visible === true) {
         this.$nextTick(function () {
           document.body.appendChild(_this.$refs.contentWrapper);
+
+          var _this$$refs$triggerWr = _this.$refs.triggerWrapper.getBoundingClientRect(),
+              width = _this$$refs$triggerWr.width,
+              height = _this$$refs$triggerWr.height,
+              top = _this$$refs$triggerWr.top,
+              left = _this$$refs$triggerWr.left;
+
+          _this.$refs.contentWrapper.style.left = left + window.scrollX + 'px';
+          _this.$refs.contentWrapper.style.top = top + window.scrollY + 'px';
 
           var eventHandler = function eventHandler() {
             _this.visible = false;
@@ -13888,13 +13898,8 @@ var _default = {
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
-
+    console.log('hi');
     console.log(this.$refs);
-    setTimeout(function () {
-      console.log(_this2.$refs.contentWrapper);
-      document.body.appendChild(_this2.$refs.contentWrapper);
-    }, 1000);
   }
 };
 exports.default = _default;
@@ -13917,37 +13922,30 @@ exports.default = _default;
       on: {
         click: function($event) {
           $event.stopPropagation()
-          return _vm.xxx($event)
+          return _vm.onClick($event)
         }
       }
     },
     [
-      _c(
-        "div",
-        {
-          directives: [
+      _vm.visible
+        ? _c(
+            "div",
             {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.visible,
-              expression: "visible"
-            }
-          ],
-          ref: "contentWrapper",
-          staticClass: "content-wrapper",
-          on: {
-            click: function($event) {
-              $event.stopPropagation()
-            }
-          }
-        },
-        [_vm._t("content")],
-        2
-      ),
+              ref: "contentWrapper",
+              staticClass: "content-wrapper",
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                }
+              }
+            },
+            [_vm._t("content")],
+            2
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _vm._t("default")
-    ],
-    2
+      _c("span", { ref: "triggerWrapper" }, [_vm._t("default")], 2)
+    ]
   )
 }
 var staticRenderFns = []
@@ -14163,7 +14161,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56012" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62706" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
