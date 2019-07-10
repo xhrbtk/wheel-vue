@@ -1,7 +1,7 @@
 <template>
   <div class="popover" @click.stop="xxx">
     <!-- @click.stop 阻止冒泡 -->
-    <div ref="content-wrapper" class="content-wrapper" v-if="visible" @click.stop>
+    <div ref="contentWrapper" class="content-wrapper" v-show="visible" @click.stop>
       <slot name="content"></slot>
     </div>
     <slot></slot>
@@ -43,8 +43,7 @@ export default {
     console.log(this.$refs)
     setTimeout(() => {
       console.log(this.$refs.contentWrapper)
-      console.log('添加一个')
-      // document.body.appendChild(this.$refs.contentWrapper)
+      document.body.appendChild(this.$refs.contentWrapper)
     }, 1000)
   }
 }

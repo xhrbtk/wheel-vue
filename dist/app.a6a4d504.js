@@ -13893,7 +13893,7 @@ var _default = {
     console.log(this.$refs);
     setTimeout(function () {
       console.log(_this2.$refs.contentWrapper);
-      console.log('添加一个'); // document.body.appendChild(this.$refs.contentWrapper)
+      document.body.appendChild(_this2.$refs.contentWrapper);
     }, 1000);
   }
 };
@@ -13922,22 +13922,28 @@ exports.default = _default;
       }
     },
     [
-      _vm.visible
-        ? _c(
-            "div",
+      _c(
+        "div",
+        {
+          directives: [
             {
-              ref: "content-wrapper",
-              staticClass: "content-wrapper",
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                }
-              }
-            },
-            [_vm._t("content")],
-            2
-          )
-        : _vm._e(),
+              name: "show",
+              rawName: "v-show",
+              value: _vm.visible,
+              expression: "visible"
+            }
+          ],
+          ref: "contentWrapper",
+          staticClass: "content-wrapper",
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+            }
+          }
+        },
+        [_vm._t("content")],
+        2
+      ),
       _vm._v(" "),
       _vm._t("default")
     ],
@@ -14157,7 +14163,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51155" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56012" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
