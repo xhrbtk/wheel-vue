@@ -13864,6 +13864,8 @@ var _default = {
 
       if (this.visible === true) {
         this.$nextTick(function () {
+          document.body.appendChild(_this.$refs.contentWrapper);
+
           var eventHandler = function eventHandler() {
             _this.visible = false;
             document.removeEventListener('click', eventHandler);
@@ -13884,6 +13886,15 @@ var _default = {
       // }
 
     }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    console.log(this.$refs);
+    setTimeout(function () {
+      console.log(_this2.$refs.contentWrapper);
+      console.log('添加一个'); // document.body.appendChild(this.$refs.contentWrapper)
+    }, 1000);
   }
 };
 exports.default = _default;
@@ -13915,6 +13926,7 @@ exports.default = _default;
         ? _c(
             "div",
             {
+              ref: "content-wrapper",
               staticClass: "content-wrapper",
               on: {
                 click: function($event) {
@@ -14145,7 +14157,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58905" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51155" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

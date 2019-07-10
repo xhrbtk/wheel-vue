@@ -1,7 +1,7 @@
 <template>
   <div class="popover" @click.stop="xxx">
     <!-- @click.stop 阻止冒泡 -->
-    <div class="content-wrapper" v-if="visible" @click.stop>
+    <div ref="content-wrapper" class="content-wrapper" v-if="visible" @click.stop>
       <slot name="content"></slot>
     </div>
     <slot></slot>
@@ -18,6 +18,7 @@ export default {
       this.visible = !this.visible
       if(this.visible === true){
         this.$nextTick(() => {
+          document.body.appendChild(this.$refs.contentWrapper)
           let eventHandler = () => {
             this.visible = false
             document.removeEventListener('click', eventHandler)
@@ -37,6 +38,14 @@ export default {
       //   }, 1000)
       // }
     }
+  },
+  mounted () {
+    console.log(this.$refs)
+    setTimeout(() => {
+      console.log(this.$refs.contentWrapper)
+      console.log('添加一个')
+      // document.body.appendChild(this.$refs.contentWrapper)
+    }, 1000)
   }
 }
 </script>
