@@ -13852,6 +13852,15 @@ exports.default = void 0;
 //
 var _default = {
   name: 'WheelPopover',
+  props: {
+    position: {
+      type: String,
+      default: 'top',
+      validator: function validator(value) {
+        return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0;
+      }
+    }
+  },
   data: function data() {
     return {
       visible: false
@@ -13859,19 +13868,48 @@ var _default = {
   },
   methods: {
     positioncontent: function positioncontent() {
-      document.body.appendChild(this.$refs.contentWrapper);
+      var _this$$refs = this.$refs,
+          contentWrapper = _this$$refs.contentWrapper,
+          triggerWrapper = _this$$refs.triggerWrapper;
+      document.body.appendChild(contentWrapper);
 
-      var _this$$refs$triggerWr = this.$refs.triggerWrapper.getBoundingClientRect(),
-          width = _this$$refs$triggerWr.width,
-          height = _this$$refs$triggerWr.height,
-          top = _this$$refs$triggerWr.top,
-          left = _this$$refs$triggerWr.left;
+      var _triggerWrapper$getBo = triggerWrapper.getBoundingClientRect(),
+          width = _triggerWrapper$getBo.width,
+          height = _triggerWrapper$getBo.height,
+          top = _triggerWrapper$getBo.top,
+          left = _triggerWrapper$getBo.left;
 
-      this.$refs.contentWrapper.style.left = left + window.scrollX + 'px';
-      this.$refs.contentWrapper.style.top = top + window.scrollY + 'px';
+      var _contentWrapper$getBo = contentWrapper.getBoundingClientRect(),
+          height2 = _contentWrapper$getBo.height;
+
+      var positions = {
+        top: {
+          top: top + window.scrollY,
+          left: left + window.scrollX
+        },
+        bottom: {
+          top: top + height + window.scrollY,
+          left: left + window.scrollX
+        },
+        left: {
+          top: top + window.scrollY + (height - height2) / 2,
+          left: left + window.scrollX
+        },
+        right: {
+          top: top + window.scrollY + (height - height2) / 2,
+          left: left + window.scrollX + width
+        }
+      };
+      contentWrapper.style.left = positions[this.position].left + 'px';
+      contentWrapper.style.top = positions[this.position].top + 'px';
     },
     onClickDocument: function onClickDocument(e) {
+      // 如果点击的是弹框 就返回 不关闭 只有点的是其他地方的时候才关闭
       if (this.$refs.popover && (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))) {
+        return;
+      }
+
+      if (this.$refs.contentWrapper && (this.$refs.contentWrapper === e.target || this.$refs.contentWrapper.contains(e.target))) {
         return;
       }
 
@@ -13892,6 +13930,8 @@ var _default = {
       document.removeEventListener('click', this.onClickDocument);
     },
     onClick: function onClick(event) {
+      console.log(event.target);
+
       if (this.$refs.triggerWrapper.contains(event.target)) {
         if (this.visible === true) {
           this.close();
@@ -13927,6 +13967,7 @@ exports.default = _default;
         /* template */
         Object.assign($cbaef1, (function () {
           var render = function() {
+  var _obj
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -13937,13 +13978,24 @@ exports.default = _default;
       _vm.visible
         ? _c(
             "div",
-            { ref: "contentWrapper", staticClass: "content-wrapper" },
+            {
+              ref: "contentWrapper",
+              staticClass: "content-wrapper",
+              class: ((_obj = {}),
+              (_obj["position-" + _vm.position] = true),
+              _obj)
+            },
             [_vm._t("content")],
             2
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("span", { ref: "triggerWrapper" }, [_vm._t("default")], 2)
+      _c(
+        "span",
+        { ref: "triggerWrapper", staticStyle: { display: "inline-block" } },
+        [_vm._t("default")],
+        2
+      )
     ]
   )
 }
@@ -14160,7 +14212,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51885" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65250" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
