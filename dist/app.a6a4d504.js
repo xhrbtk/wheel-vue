@@ -13850,14 +13850,23 @@ exports.default = void 0;
 //
 //
 //
+//
+//
 var _default = {
-  name: 'WheelPopover',
+  name: "WheelPopover",
   props: {
     position: {
       type: String,
       default: 'top',
       validator: function validator(value) {
         return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0;
+      }
+    },
+    trigger: {
+      type: String,
+      default: 'click',
+      validator: function validator(value) {
+        return ['click', 'hover'].indexOf(value) >= 0;
       }
     }
   },
@@ -13866,8 +13875,40 @@ var _default = {
       visible: false
     };
   },
+  mounted: function mounted() {
+    if (this.trigger === 'click') {
+      this.$refs.popover.addEventListener('click', this.onClick);
+    } else {
+      this.$refs.popover.addEventListener('mouseenter', this.open);
+      this.$refs.popover.addEventListener('mouseleave', this.close);
+    }
+  },
+  destroyed: function destroyed() {
+    if (this.trigger === 'click') {
+      this.$refs.popover.removeEventListener('click', this.onClick);
+    } else {
+      this.$refs.popover.removeEventListener('mouseenter', this.open);
+      this.$refs.popover.removeEventListener('mouseleave', this.close);
+    }
+  },
+  computed: {
+    openEvent: function openEvent() {
+      if (this.trigger === 'click') {
+        return 'click';
+      } else {
+        return 'mouseenter';
+      }
+    },
+    closeEvent: function closeEvent() {
+      if (this.trigger === 'click') {
+        return 'click';
+      } else {
+        return 'mouseleave';
+      }
+    }
+  },
   methods: {
-    positioncontent: function positioncontent() {
+    positionContent: function positionContent() {
       var _this$$refs = this.$refs,
           contentWrapper = _this$$refs.contentWrapper,
           triggerWrapper = _this$$refs.triggerWrapper;
@@ -13904,7 +13945,6 @@ var _default = {
       contentWrapper.style.top = positions[this.position].top + 'px';
     },
     onClickDocument: function onClickDocument(e) {
-      // 如果点击的是弹框 就返回 不关闭 只有点的是其他地方的时候才关闭
       if (this.$refs.popover && (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))) {
         return;
       }
@@ -13920,7 +13960,7 @@ var _default = {
 
       this.visible = true;
       this.$nextTick(function () {
-        _this.positioncontent();
+        _this.positionContent();
 
         document.addEventListener('click', _this.onClickDocument);
       });
@@ -13930,31 +13970,14 @@ var _default = {
       document.removeEventListener('click', this.onClickDocument);
     },
     onClick: function onClick(event) {
-      console.log(event.target);
-
       if (this.$refs.triggerWrapper.contains(event.target)) {
         if (this.visible === true) {
           this.close();
         } else {
           this.open();
         }
-      } // 以下方法行不通
-      //   setTimeout(() => {
-      //     //  ()=>{} function x(){}.bind(this)
-      //     // x()是一个函数 x().bind(this) 是一个新的函数
-      //     document.addEventListener('click', function x(){
-      //       this.visible = false
-      //       document.removeEventListener('click', x)
-      //       console.log('点击document关闭popover')
-      //     }.bind(this))
-      //   }, 1000)
-      // }
-
+      }
     }
-  },
-  mounted: function mounted() {
-    console.log('hi');
-    console.log(this.$refs);
   }
 };
 exports.default = _default;
@@ -13971,33 +13994,29 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { ref: "popover", staticClass: "popover", on: { click: _vm.onClick } },
-    [
-      _vm.visible
-        ? _c(
-            "div",
-            {
-              ref: "contentWrapper",
-              staticClass: "content-wrapper",
-              class: ((_obj = {}),
-              (_obj["position-" + _vm.position] = true),
-              _obj)
-            },
-            [_vm._t("content")],
-            2
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "span",
-        { ref: "triggerWrapper", staticStyle: { display: "inline-block" } },
-        [_vm._t("default")],
-        2
-      )
-    ]
-  )
+  return _c("div", { ref: "popover", staticClass: "popover" }, [
+    _vm.visible
+      ? _c(
+          "div",
+          {
+            ref: "contentWrapper",
+            staticClass: "content-wrapper",
+            class: ((_obj = {}),
+            (_obj["position-" + _vm.position] = true),
+            _obj)
+          },
+          [_vm._t("content", null, { close: _vm.close })],
+          2
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "span",
+      { ref: "triggerWrapper", staticStyle: { display: "inline-block" } },
+      [_vm._t("default")],
+      2
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -14212,7 +14231,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65250" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56563" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
