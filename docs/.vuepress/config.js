@@ -1,4 +1,5 @@
 module.exports = {
+  base: '/wheel-vue/',
   title: 'Wheel-Vue',
   description: '一个好用的ui组件库',
   themeConfig: {
