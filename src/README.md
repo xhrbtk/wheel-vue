@@ -144,3 +144,7 @@ IE 15 及以上浏览器都支持此样式
 
 ## provide/inject: 在父组件中通过provider来提供变量，然后在子组件中通过inject来注入变量
 ## 不论子组件有多深，只要调用了inject那么就可以注入provieder中的数据。而不是只局限于只能从当前父组件的prop属性来获取数据
+
+## props和data区别  如果需要用户（前端开发者）传值 就用props  如果不需要用户传值 自定义就用data
+
+

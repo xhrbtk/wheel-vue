@@ -19,6 +19,7 @@ export default {
   mounted () {
     this.eventBus.$on('update:selected', (item, vm) => {
       // console.log(item, vm.$el)
+      // vm是被选中的div
       let {width, height, top, left} = vm.$el.getBoundingClientRect()
       console.log(width)
       this.$nextTick(() => {

@@ -13160,7 +13160,8 @@ var _default = {
       default: function _default() {
         return {
           text: '关闭',
-          callback: undefined
+          callback: undefined //如果默认值是一个对象 不能直接写一个对象 要return一个对象
+
         };
       }
     },
@@ -13208,7 +13209,7 @@ var _default = {
     close: function close() {
       this.$el.remove();
       this.$emit('close');
-      this.$destroy();
+      this.$destroy(); //destroy 并不会把元素从页面中删除掉  所以先要执行remove将元素删除掉  之后再将其destory
     },
     onClickClose: function onClickClose() {
       this.close();
@@ -13319,12 +13320,14 @@ var _default = {
         message: message,
         propsData: toastOptions,
         onClose: function onClose() {
+          console.log('关闭了');
           currentToast = null;
         }
       }); //es6语法
     };
   }
 }; // heplers  生成toast
+//{} es6语法传值
 
 exports.default = _default;
 
@@ -13337,13 +13340,16 @@ function createToast(_ref) {
   var toast = new Constructor({
     propsData: propsData
   });
-  toast.$slots.default = [message];
-  toast.$mount(); // 回调函数 如果已经手动关闭了 执行回调
+  toast.$slots.default = [message]; //给toast传了一个默认插槽
+
+  toast.$mount(); //如果将slot放在mount之前 那么实例的所有方法都不会执行
+  // 回调函数 如果已经手动关闭了 执行回调
 
   toast.$on('close', onClose);
   document.body.appendChild(toast.$el);
   return toast;
-}
+} //使用plugin是因为1.避免他把vue配到另一个轮子上面 我们就import不到vue了
+//2. $toast可能会覆盖现有的东西，但是我不确定能不能覆盖，用户自己use 出问题是用户的事儿
 },{"./toast":"src/toast.vue"}],"src/tabs.vue":[function(require,module,exports) {
 "use strict";
 
@@ -13397,6 +13403,7 @@ var _default = {
       if (vm.$options.name === 'wheelTabsHead') {
         vm.$children.forEach(function (childVm) {
           if (childVm.$options.name === 'wheelTabsItem' && childVm.name === _this.selected) {
+            //找到被选中的item 然后给item加下划线
             _this.eventBus.$emit('update:selected', _this.selected, childVm);
           }
         });
@@ -13481,6 +13488,7 @@ var _default = {
 
     this.eventBus.$on('update:selected', function (item, vm) {
       // console.log(item, vm.$el)
+      // vm是被选中的div
       var _vm$$el$getBoundingCl = vm.$el.getBoundingClientRect(),
           width = _vm$$el$getBoundingCl.width,
           height = _vm$$el$getBoundingCl.height,
@@ -13938,12 +13946,15 @@ var _default = {
         },
         right: {
           top: top + window.scrollY + (height - height2) / 2,
-          left: left + window.scrollX + width
+          left: left + window.scrollX + width //计算在出现滚动条之后的位置
+          //overflow：hidden造成的问题 将popover放在body里面
+
         }
       };
       contentWrapper.style.left = positions[this.position].left + 'px';
       contentWrapper.style.top = positions[this.position].top + 'px';
     },
+    //这个只管点外面的情况 如果点的popover里面 popover会自己解决
     onClickDocument: function onClickDocument(e) {
       if (this.$refs.popover && (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))) {
         return;
@@ -13955,6 +13966,7 @@ var _default = {
 
       this.close();
     },
+    // 弹出popover 并且调整位置
     open: function open() {
       var _this = this;
 
@@ -13965,10 +13977,13 @@ var _default = {
         document.addEventListener('click', _this.onClickDocument);
       });
     },
+    // 关闭popover 并将open的时候添加的addEventListener去掉
     close: function close() {
-      this.visible = false;
+      this.visible = false; //如果不remove 就会一直积累监听事件
+
       document.removeEventListener('click', this.onClickDocument);
     },
+    // 如果当前点击按钮部分 我就切换 如果不是 我就不管
     onClick: function onClick(event) {
       if (this.$refs.triggerWrapper.contains(event.target)) {
         if (this.visible === true) {
@@ -13978,7 +13993,10 @@ var _default = {
         }
       }
     }
-  }
+  } // 问题1 overflow:hidden  body.appendChild
+  // 问题2 关闭重复 -》 分开document 只管外面 popover只管里面
+  //问题3 忘记取消监听document-》 收拢close   每次将visible变为false的时候都应该取消doucment的监听
+
 };
 exports.default = _default;
         var $0d206c = exports.default || module.exports;
@@ -14069,6 +14087,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//不要儿子搞一下爸爸 爸爸搞一下儿子 只在一个地方更改数据
 var _default = {
   name: "WheelCollapse",
   props: {
@@ -14093,20 +14112,25 @@ var _default = {
   mounted: function mounted() {
     var _this = this;
 
-    this.eventBus.$emit('update:selected', this.selected);
+    this.eventBus.$emit('update:selected', this.selected); //一开始的状态 事件中心通知儿子们改选中的选中
+    //接受儿子们反应出来的用户意图  如果用户打算添加选中
+
     this.eventBus.$on('update:addSelected', function (name) {
-      var selectedCopy = JSON.parse(JSON.stringify(_this.selected));
+      var selectedCopy = JSON.parse(JSON.stringify(_this.selected)); //拷贝selected 之所以拷贝是因为vue不支持修改props
 
       if (_this.single) {
         selectedCopy = [name];
       } else {
         selectedCopy.push(name);
-      }
+      } //得到最小的被选中的item之后通知儿子们进行状态修改
+
 
       _this.eventBus.$emit('update:selected', selectedCopy);
 
-      _this.$emit('update:selected', selectedCopy);
-    });
+      _this.$emit('update:selected', selectedCopy); //通知外界选中的数据发生了变化
+
+    }); //通知儿子们该移除的移除
+
     this.eventBus.$on('update:removeSelected', function (name) {
       var selectedCopy = JSON.parse(JSON.stringify(_this.selected));
       var index = selectedCopy.indexOf(name);
@@ -14114,7 +14138,8 @@ var _default = {
 
       _this.eventBus.$emit('update:selected', selectedCopy);
 
-      _this.$emit('update:selected', selectedCopy);
+      _this.$emit('update:selected', selectedCopy); //通知外界选中的数据发生了变化
+
     });
   }
 };
@@ -14205,6 +14230,7 @@ var _default = {
   mounted: function mounted() {
     var _this = this;
 
+    //儿子会监听eventbus 只要爸爸说儿子更新 儿子就会更新
     this.eventBus && this.eventBus.$on('update:selected', function (names) {
       if (names.indexOf(_this.name) >= 0) {
         _this.open = true;
@@ -14216,8 +14242,10 @@ var _default = {
   methods: {
     toggle: function toggle() {
       if (this.open) {
+        //触发的一个意图 用户打算移除一个item
         this.eventBus && this.eventBus.$emit('update:removeSelected', this.name);
       } else {
+        //用户打算添加一个选中
         this.eventBus && this.eventBus.$emit('update:addSelected', this.name);
       }
     }
@@ -14478,7 +14506,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50492" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54030" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

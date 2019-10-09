@@ -28,7 +28,7 @@
         type: Object,
         default () {
           return {
-            text: '关闭', callback: undefined
+            text: '关闭', callback: undefined  //如果默认值是一个对象 不能直接写一个对象 要return一个对象
           }
         }
       },
@@ -75,7 +75,7 @@
       close () {
         this.$el.remove()
         this.$emit('close')
-        this.$destroy()
+        this.$destroy()  //destroy 并不会把元素从页面中删除掉  所以先要执行remove将元素删除掉  之后再将其destory
       },
       onClickClose () {
         this.close()
@@ -107,7 +107,7 @@ $animation-duration: 300ms;
 .wrapper{
   position: fixed;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%);  //因为在展示动画的时候会出现先偏移后动画  用两个盒子解决 外面盒子加动画  里面盒子居中
   &.position-top{
     top: 0;
     .toast{

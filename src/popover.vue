@@ -82,11 +82,14 @@
           right: {
             top: top + window.scrollY + (height - height2) / 2,
             left: left + window.scrollX + width
+            //计算在出现滚动条之后的位置
+            //overflow：hidden造成的问题 将popover放在body里面
           },
         }
         contentWrapper.style.left = positions[this.position].left + 'px'
         contentWrapper.style.top = positions[this.position].top + 'px'
       },
+      //这个只管点外面的情况 如果点的popover里面 popover会自己解决
       onClickDocument (e) {
         if (this.$refs.popover &&
           (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))
@@ -96,6 +99,7 @@
         ) { return }
         this.close()
       },
+      // 弹出popover 并且调整位置
       open () {
         this.visible = true
         this.$nextTick(() => {
@@ -103,10 +107,13 @@
           document.addEventListener('click', this.onClickDocument)
         })
       },
+      // 关闭popover 并将open的时候添加的addEventListener去掉
       close () {
         this.visible = false
+        //如果不remove 就会一直积累监听事件
         document.removeEventListener('click', this.onClickDocument)
       },
+      // 如果当前点击按钮部分 我就切换 如果不是 我就不管
       onClick (event) {
         if (this.$refs.triggerWrapper.contains(event.target)) {
           if (this.visible === true) {
@@ -118,6 +125,10 @@
       }
     }
   }
+
+  // 问题1 overflow:hidden  body.appendChild
+  // 问题2 关闭重复 -》 分开document 只管外面 popover只管里面
+  //问题3 忘记取消监听document-》 收拢close   每次将visible变为false的时候都应该取消doucment的监听
 </script>
 
 <style scoped lang="scss">

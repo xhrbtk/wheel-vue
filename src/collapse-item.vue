@@ -29,6 +29,7 @@
     },
     inject: ['eventBus'],
     mounted () {
+      //儿子会监听eventbus 只要爸爸说儿子更新 儿子就会更新
       this.eventBus && this.eventBus.$on('update:selected', (names) => {
         if (names.indexOf(this.name) >= 0) {
           this.open = true
@@ -40,8 +41,10 @@
     methods: {
       toggle () {
         if (this.open) {
+          //触发的一个意图 用户打算移除一个item
           this.eventBus && this.eventBus.$emit('update:removeSelected', this.name)
         } else {
+          //用户打算添加一个选中
           this.eventBus && this.eventBus.$emit('update:addSelected', this.name)
         }
       },

@@ -40,6 +40,7 @@
           vm.$children.forEach((childVm) => {
             if (childVm.$options.name === 'wheelTabsItem'
               && childVm.name === this.selected) {
+                //找到被选中的item 然后给item加下划线
               this.eventBus.$emit('update:selected', this.selected, childVm)
             }
           })
