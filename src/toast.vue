@@ -19,7 +19,7 @@
     props: {
       autoClose: {
         type: [Boolean, Number],
-        default: 5,
+        default: 5000,
         validator (value) {
           return value === false || typeof value === 'number';
         }
@@ -105,6 +105,7 @@ $animation-duration: 300ms;
   100% { opacity: 1;}
 }
 .wrapper{
+  z-index: 100;
   position: fixed;
   left: 50%;
   transform: translateX(-50%);  //因为在展示动画的时候会出现先偏移后动画  用两个盒子解决 外面盒子加动画  里面盒子居中

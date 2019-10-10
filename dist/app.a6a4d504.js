@@ -13150,7 +13150,7 @@ var _default = {
   props: {
     autoClose: {
       type: [Boolean, Number],
-      default: 5,
+      default: 5000,
       validator: function validator(value) {
         return value === false || typeof value === 'number';
       }
@@ -13392,23 +13392,29 @@ var _default = {
       eventBus: this.eventBus
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    if (this.$children.length === 0) {
-      console && console.warn && console.warn('tabs的子组件应该是tabs-head和tabs-nav，但你没有写子组件');
-    }
-
-    this.$children.forEach(function (vm) {
-      if (vm.$options.name === 'wheelTabsHead') {
-        vm.$children.forEach(function (childVm) {
-          if (childVm.$options.name === 'wheelTabsItem' && childVm.name === _this.selected) {
-            //找到被选中的item 然后给item加下划线
-            _this.eventBus.$emit('update:selected', _this.selected, childVm);
-          }
-        });
+  methods: {
+    checkChildren: function checkChildren() {
+      if (this.$children.length === 0) {
+        console && console.warn && console.warn('tabs的子组件应该是tabs-head和tabs-nav，但你没有写子组件');
       }
-    });
+    },
+    selectTab: function selectTab() {
+      var _this = this;
+
+      this.$children.forEach(function (vm) {
+        if (vm.$options.name === 'wheelTabsHead') {
+          vm.$children.forEach(function (childVm) {
+            if (childVm.$options.name === 'wheelTabsItem' && childVm.name === _this.selected) {
+              _this.eventBus.$emit('update:selected', _this.selected, childVm);
+            }
+          });
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.checkChildren();
+    this.selectTab();
   }
 };
 exports.default = _default;
@@ -13478,30 +13484,27 @@ exports.default = void 0;
 var _default = {
   name: 'wheelTabsHead',
   inject: ['eventBus'],
-  data: function data() {
-    return {
-      active: false
-    };
-  },
   mounted: function mounted() {
     var _this = this;
 
     this.eventBus.$on('update:selected', function (item, vm) {
-      // console.log(item, vm.$el)
-      // vm是被选中的div
-      var _vm$$el$getBoundingCl = vm.$el.getBoundingClientRect(),
-          width = _vm$$el$getBoundingCl.width,
-          height = _vm$$el$getBoundingCl.height,
-          top = _vm$$el$getBoundingCl.top,
-          left = _vm$$el$getBoundingCl.left;
+      console.log(item, vm);
 
-      console.log(width);
-
-      _this.$nextTick(function () {
-        _this.$refs.line.style.width = width + 'px';
-        _this.$refs.line.style.left = left + 'px';
-      });
+      _this.updateLinePosition(vm);
     });
+  },
+  methods: {
+    updateLinePosition: function updateLinePosition(selectedVm) {
+      var _selectedVm$$el$getBo = selectedVm.$el.getBoundingClientRect(),
+          width = _selectedVm$$el$getBo.width,
+          left = _selectedVm$$el$getBo.left;
+
+      var _this$$refs$head$getB = this.$refs.head.getBoundingClientRect(),
+          left2 = _this$$refs$head$getB.left;
+
+      this.$refs.line.style.width = "".concat(width, "px");
+      this.$refs.line.style.left = "".concat(left - left2, "px");
+    }
   }
 };
 exports.default = _default;
@@ -13519,7 +13522,7 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "tabs-head" },
+    { ref: "head", staticClass: "tabs-head" },
     [
       _vm._t("default"),
       _vm._v(" "),
@@ -13648,7 +13651,6 @@ var _default = {
       active: false
     };
   },
-  // props相当于函数传参  data相当于函数内部自定义的数据
   props: {
     disabled: {
       type: Boolean,
@@ -13659,14 +13661,12 @@ var _default = {
       required: true
     }
   },
-  methods: {
-    onClick: function onClick() {
-      if (this.disabled) {
-        return;
-      }
-
-      this.eventBus && this.eventBus.$emit('update:selected', this.name, this);
-      this.$emit('click', this);
+  computed: {
+    classes: function classes() {
+      return {
+        active: this.active,
+        disabled: this.disabled
+      };
     }
   },
   created: function created() {
@@ -13678,12 +13678,14 @@ var _default = {
       });
     }
   },
-  computed: {
-    classes: function classes() {
-      return {
-        active: this.active,
-        disabled: this.disabled
-      };
+  methods: {
+    onClick: function onClick() {
+      if (this.disabled) {
+        return;
+      }
+
+      this.eventBus && this.eventBus.$emit('update:selected', this.name, this);
+      this.$emit('click', this);
     }
   }
 };
@@ -13771,19 +13773,19 @@ var _default = {
       required: true
     }
   },
-  created: function created() {
-    var _this = this;
-
-    this.eventBus.$on('update:selected', function (name) {
-      _this.active = name === _this.name;
-    });
-  },
   computed: {
     classes: function classes() {
       return {
         active: this.active
       };
     }
+  },
+  created: function created() {
+    var _this = this;
+
+    this.eventBus.$on('update:selected', function (name) {
+      _this.active = name === _this.name;
+    });
   }
 };
 exports.default = _default;
@@ -14112,16 +14114,21 @@ var _default = {
   mounted: function mounted() {
     var _this = this;
 
+    console.log(this.selected);
     this.eventBus.$emit('update:selected', this.selected); //一开始的状态 事件中心通知儿子们改选中的选中
     //接受儿子们反应出来的用户意图  如果用户打算添加选中
 
     this.eventBus.$on('update:addSelected', function (name) {
+      console.log("\u7238\u7238\u77E5\u9053\u4E86\u7528\u6237\u6253\u7B97\u6DFB\u52A0 ".concat(_this.selected));
       var selectedCopy = JSON.parse(JSON.stringify(_this.selected)); //拷贝selected 之所以拷贝是因为vue不支持修改props
 
       if (_this.single) {
         selectedCopy = [name];
+        console.log('这是单选');
       } else {
+        console.log('不是单选');
         selectedCopy.push(name);
+        console.log(selectedCopy);
       } //得到最小的被选中的item之后通知儿子们进行状态修改
 
 
@@ -14134,6 +14141,7 @@ var _default = {
     this.eventBus.$on('update:removeSelected', function (name) {
       var selectedCopy = JSON.parse(JSON.stringify(_this.selected));
       var index = selectedCopy.indexOf(name);
+      console.log(name);
       selectedCopy.splice(index, 1);
 
       _this.eventBus.$emit('update:selected', selectedCopy);
@@ -14243,9 +14251,11 @@ var _default = {
     toggle: function toggle() {
       if (this.open) {
         //触发的一个意图 用户打算移除一个item
+        console.log("\u513F\u5B50\u544A\u8BC9\u7238\u7238\u8981\u79FB\u9664 ".concat(this.name));
         this.eventBus && this.eventBus.$emit('update:removeSelected', this.name);
       } else {
         //用户打算添加一个选中
+        console.log("\u513F\u5B50\u544A\u8BC9\u7238\u7238\u8981\u6DFB\u52A0 ".concat(this.name));
         this.eventBus && this.eventBus.$emit('update:addSelected', this.name);
       }
     }
@@ -14396,7 +14406,8 @@ new _vue.default({
     loading2: false,
     loading3: false,
     message: 'hi',
-    selectedTab: 'finance'
+    selectedTab: 'finance',
+    selectCol: ['2']
   },
   methods: {
     inputChange: function inputChange(e) {
@@ -14506,7 +14517,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54030" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54079" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

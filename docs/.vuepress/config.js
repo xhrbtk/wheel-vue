@@ -23,6 +23,10 @@ module.exports = {
         children: [
           '/components/button',
           '/components/input',
+          '/components/popover',
+          '/components/tabs',
+          '/components/toast',
+          '/components/collapse'
         ]
       },
     ]

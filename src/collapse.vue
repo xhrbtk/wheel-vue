@@ -29,15 +29,20 @@
       }
     },
     mounted () {
+      console.log(this.selected)
       this.eventBus.$emit('update:selected', this.selected)  //一开始的状态 事件中心通知儿子们改选中的选中
 
       //接受儿子们反应出来的用户意图  如果用户打算添加选中
       this.eventBus.$on('update:addSelected', (name) => {
+        console.log(`爸爸知道了用户打算添加 ${this.selected}`)
         let selectedCopy = JSON.parse(JSON.stringify(this.selected)) //拷贝selected 之所以拷贝是因为vue不支持修改props
         if (this.single) {
           selectedCopy = [name]
+          console.log('这是单选')
         } else {
+          console.log('不是单选')
           selectedCopy.push(name)
+          console.log(selectedCopy)
         }
         //得到最小的被选中的item之后通知儿子们进行状态修改
         this.eventBus.$emit('update:selected', selectedCopy)
@@ -49,6 +54,7 @@
       this.eventBus.$on('update:removeSelected', (name) => {
         let selectedCopy = JSON.parse(JSON.stringify(this.selected))
         let index = selectedCopy.indexOf(name)
+        console.log(name)
         selectedCopy.splice(index, 1)
         this.eventBus.$emit('update:selected', selectedCopy)
         this.$emit('update:selected', selectedCopy) //通知外界选中的数据发生了变化

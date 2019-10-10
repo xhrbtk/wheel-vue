@@ -42,9 +42,11 @@
       toggle () {
         if (this.open) {
           //触发的一个意图 用户打算移除一个item
+          console.log(`儿子告诉爸爸要移除 ${this.name}`)          
           this.eventBus && this.eventBus.$emit('update:removeSelected', this.name)
         } else {
           //用户打算添加一个选中
+          console.log(`儿子告诉爸爸要添加 ${this.name}`)          
           this.eventBus && this.eventBus.$emit('update:addSelected', this.name)
         }
       },

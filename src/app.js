@@ -44,7 +44,8 @@ new Vue({
       loading2: false,
       loading3: false,
       message: 'hi',
-      selectedTab: 'finance'
+      selectedTab: 'finance',
+      selectCol: ['2']
     },
     methods: {
       inputChange(e){
